@@ -1,0 +1,39 @@
+<extend name="Base/base" />
+
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="权限错误" leaf="权限检查" url="#"/>
+</block>
+
+<block name="content">
+    <include file="permissionsAlert"/>
+    <div class="row">    <!-- 表格 开始-->
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue"></h3>
+
+            <div class="table-responsive">
+                <table id="files" class="table table-striped table-bordered table-hover" width="100%">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>ERROR!</strong> <a href="#" class="alert-link">权限错误</a> 请提高权限再操作.
+                    </div>
+
+                </table>
+            </div>
+        </div>
+    </div>   <!-- 搜索结果 结束 -->
+
+</block>
+
+<block name="page_js">
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <script src="__JS__/jquery.dataTables.min.js"></script>
+    <script src="__JS__/jquery.dataTables.bootstrap.js"></script>
+    <script src="__JS__/messages_zh.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+    <script src="__JS__/layer/layer.js"></script>
+</block>
+
+<block name="inline_js">
+
+</block>

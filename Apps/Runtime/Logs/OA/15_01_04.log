@@ -1,0 +1,1706 @@
+[ 2015-01-04T14:33:27+08:00 ] 127.0.0.1 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.655201s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.218400s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.124801s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:32+08:00 ] 127.0.0.1 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.124801s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'zengk' AND `password` = 'c4ca4238a0b923820dcc509a6f75849b' LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-01-04 14:33:32',`login_count`=49,`calendar_color`='',`is_login`=1,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.031200s ]
+NOTIC: [8] Undefined index: headImg D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 48 行.
+
+[ 2015-01-04T14:33:33+08:00 ] 127.0.0.1 /develop/OA/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_saying` [ RunTime:0.062400s ]
+SQL: SELECT MIN(id) AS tp_min FROM `oa_saying` LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT MAX(id) AS tp_max FROM `oa_saying` LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT `content` FROM `oa_saying` WHERE `id` = 12 LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.078000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.093600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.078000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.062400s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.374401s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.374401s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/leaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.078000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.078000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-29&end=2015-02-09&_=1420353220358
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-29&end=2015-02-09&_=1420353220355
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420353220354
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-29&end=2015-02-09&_=1420353220356
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-29&end=2015-02-09&_=1420353220360
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:41+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-29&end=2015-02-09&_=1420353220359
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:41+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-29&end=2015-02-09&_=1420353220357
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:56+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.078000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.109201s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.124801s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:33:57+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420353236843
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T14:36:08+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015601s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:36:08+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420353368225
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T14:36:52+08:00 ] 127.0.0.1 /develop/OA/Schedule/personalCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015601s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.109200s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.171600s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:36:53+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/13.html?start=2014-12-29&end=2015-02-09&_=1420353412829
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '13' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:21+08:00 ] 127.0.0.1 /develop/OA/Schedule/addLeaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+NOTIC: [8] Undefined variable: departLeader D:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\a74d04dee496614403945c7dd0e7a95d.php 第 939 行.
+NOTIC: [8] Undefined variable: departLeader D:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\a74d04dee496614403945c7dd0e7a95d.php 第 941 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062400s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062400s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:22+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420353441693
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:24+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-29&end=2015-02-09&_=1420353441694
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:26+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420353441695
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:27+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-01&end=2015-01-12&_=1420353441696
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.015600s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:28+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-10-27&end=2014-12-08&_=1420353441697
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:28+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-09-29&end=2014-11-10&_=1420353441698
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:31+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-09-29&end=2014-11-10&_=1420353441699
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-10-27&end=2014-12-08&_=1420353441700
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-01&end=2015-01-12&_=1420353441701
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:34+08:00 ] 127.0.0.1 /develop/OA/Schedule/leaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.015600s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420353455070
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-29&end=2015-02-09&_=1420353455075
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-29&end=2015-02-09&_=1420353455071
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.046800s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-29&end=2015-02-09&_=1420353455072
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.031200s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-29&end=2015-02-09&_=1420353455076
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-29&end=2015-02-09&_=1420353455074
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:35+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-29&end=2015-02-09&_=1420353455073
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:39+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-01&end=2015-01-12&_=1420353455078
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.031200s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:39+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-01&end=2015-01-12&_=1420353455081
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:39+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-01&end=2015-01-12&_=1420353455077
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-01&end=2015-01-12&_=1420353455079
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-01&end=2015-01-12&_=1420353455082
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-01&end=2015-01-12&_=1420353455080
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:37:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-01&end=2015-01-12&_=1420353455083
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.015600s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:38:29+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:38:30+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420353509773
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T14:40:59+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.004000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.050003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.050003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002001s ]
+
+[ 2015-01-04T14:41:00+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420353659694
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002001s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T14:46:18+08:00 ] 127.0.0.1 /develop/OA/Index/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015601s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015601s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `oa_user` WHERE `id` = 13 LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-01-04 14:33:32',`login_count`=49,`calendar_color`='',`is_login`=0,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.015600s ]
+
+[ 2015-01-04T14:46:18+08:00 ] 127.0.0.1 /develop/OA/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.140400s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.140400s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.015600s ]
+INFO: [ app_end ] --END-- [ RunTime:0.015600s ]
+
+[ 2015-01-04T14:59:03+08:00 ] 127.0.0.1 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.014001s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.028002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.028002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:07+08:00 ] 127.0.0.1 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.007000s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'zengk' AND `password` = 'c4ca4238a0b923820dcc509a6f75849b' LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-01-04 14:59:07',`login_count`=50,`calendar_color`='',`is_login`=1,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.027002s ]
+NOTIC: [8] Undefined index: headImg D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 48 行.
+
+[ 2015-01-04T14:59:08+08:00 ] 127.0.0.1 /develop/OA/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_saying` [ RunTime:0.007000s ]
+SQL: SELECT MIN(id) AS tp_min FROM `oa_saying` LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT MAX(id) AS tp_max FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT `content` FROM `oa_saying` WHERE `id` = 9 LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.006001s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.021002s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.015001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.006000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.005001s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.068004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.068004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/leaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.002000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.006001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.006000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.047003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.047003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420354750230
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.008000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.011001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-29&end=2015-02-09&_=1420354750235
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-29&end=2015-02-09&_=1420354750232
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-29&end=2015-02-09&_=1420354750231
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-29&end=2015-02-09&_=1420354750234
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.006001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-29&end=2015-02-09&_=1420354750233
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:10+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-29&end=2015-02-09&_=1420354750236
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-01&end=2015-01-12&_=1420354750239
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.005000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-01&end=2015-01-12&_=1420354750242
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.008000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.006000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-01&end=2015-01-12&_=1420354750237
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-01&end=2015-01-12&_=1420354750241
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-01&end=2015-01-12&_=1420354750238
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-01&end=2015-01-12&_=1420354750240
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T14:59:13+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-01&end=2015-01-12&_=1420354750243
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:01:42+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEventInfo.html?event_id=10
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.description,b.image_url FROM oa_schedule a LEFT JOIN oa_user b on a.user_id=b.id  WHERE a.id = '10' LIMIT 1   [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:01:47+08:00 ] 127.0.0.1 /develop/OA/Schedule/addLeaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+NOTIC: [8] Undefined variable: departLeader D:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\a74d04dee496614403945c7dd0e7a95d.php 第 939 行.
+NOTIC: [8] Undefined variable: departLeader D:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\a74d04dee496614403945c7dd0e7a95d.php 第 941 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:01:48+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1420354907623
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.000000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:02:40+08:00 ] 127.0.0.1 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.005001s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2015-01-04T15:02:44+08:00 ] 127.0.0.1 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005001s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'zengk' AND `password` = 'c4ca4238a0b923820dcc509a6f75849b' LIMIT 1   [ RunTime:0.000000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-01-04 15:02:44',`login_count`=51,`calendar_color`='',`is_login`=1,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.024001s ]
+NOTIC: [8] Undefined index: headImg D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 48 行.
+
+[ 2015-01-04T15:02:44+08:00 ] 127.0.0.1 /develop/OA/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_saying` [ RunTime:0.004001s ]
+SQL: SELECT MIN(id) AS tp_min FROM `oa_saying` LIMIT 1   [ RunTime:0.000000s ]
+SQL: SELECT MAX(id) AS tp_max FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT `content` FROM `oa_saying` WHERE `id` = 27 LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005001s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.006001s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' AND a.begin_time BETWEEN '2015-01-04 00:00' AND '2015-01-04 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.005001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.056003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.056003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.003000s ]
+
+[ 2015-01-04T15:02:47+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.007001s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.007001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.005000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.058004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.058004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002000s ]
+
+[ 2015-01-04T15:02:47+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420354967460
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:04:07+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.015600s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062400s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062400s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:04:08+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355047824
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:04:22+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.031200s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:04:22+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355062558
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:04:50+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:04:51+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355090863
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.015600s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:04:55+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.015600s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062400s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062400s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:04:55+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355095249
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:08:18+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.015600s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:08:18+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355298238
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.015600s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:09:12+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:09:12+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355352290
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:09:31+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.015600s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062401s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062401s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:09:32+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355371805
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:09:45+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.015600s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:09:46+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355385920
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:10:33+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.015600s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.000000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:10:35+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355434310
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:11:02+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.015600s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.000000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046800s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046800s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T15:11:03+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420355462899
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+ERR: 非法操作:getReception
+
+[ 2015-01-04T15:11:12+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T16:10:11+08:00 ] 172.30.88.51 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.015600s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015600s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015600s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T16:12:52+08:00 ] 172.30.88.51 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'ＸＩＥＸＸ' AND `password` = '81dc9bdb52d04dc20036dbd8313ed055' LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031200s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031200s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-04T16:13:02+08:00 ] 172.30.88.51 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.000000s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'ＸＩＥＸＸ' AND `password` = '81dc9bdb52d04dc20036dbd8313ed055' LIMIT 1   [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.000000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.000000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.015600s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.015600s ]
+
+[ 2015-01-04T17:09:17+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.006001s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.006001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.006000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given D:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.060004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-04T17:09:18+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2014-12-29&end=2015-01-05&_=1420362557632
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:getReception
+

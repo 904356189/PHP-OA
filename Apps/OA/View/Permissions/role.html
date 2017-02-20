@@ -1,0 +1,163 @@
+<extend name="Base/base" />
+
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="角色列表" leaf="权限管理" url="#"/>
+</block>
+
+<block name="content">
+    <include file="permissionsAlert"/>
+    <div class="row">    <!-- 表格 开始-->
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">共有{$count}条记录</h3>
+
+            <div class="table-responsive">
+                <table id="files" class="table table-striped table-bordered table-hover" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="center">
+                            序号
+                        </th>
+                        <th class="center">角色名称</th>
+                        <th class="center">创建时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                    <notempty name="data">
+                        <volist name="data" id="vo">
+                            <tr>
+                                <th class="center">{$vo.id}</th>
+                                <th class="center">{$vo.name}</th>
+                                <th class="center">{$vo.create_time}</th>
+                                <th class="center">{$vo.update_time}</th>
+                                <th class="center"><div class="btn-group">
+                                    <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" onclick="assignPermissions(this)" role-id="{$vo.id}">分配权限</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">close</a></li>
+                                    </ul>
+                                </div></th>
+                            </tr>
+                        </volist>
+                    </notempty>
+                    </thead>
+
+
+                </table>
+            </div>
+        </div>
+    </div>   <!-- 搜索结果 结束 -->
+
+</block>
+
+<block name="page_js">
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <script src="__JS__/jquery.dataTables.min.js"></script>
+    <script src="__JS__/jquery.dataTables.bootstrap.js"></script>
+    <script src="__JS__/messages_zh.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+    <script src="__JS__/layer/layer.js"></script>
+</block>
+
+<block name="inline_js">
+    <script type="text/javascript">
+        jQuery(function($) {
+
+            //设置指示标位置
+            setSidebarActive('permissions_root', 'role_list');
+
+            $(".qx").on('click', function () {
+                $("#modal-body").html("");
+                $('#event-form').hide();
+            });
+
+
+            /**
+             * 保存
+             */
+            $(".save").on('click', function () {
+                var permissions_id = "";
+                $("#modal-body input[type='checkbox']:checked").each(function (k, v) {
+                    permissions_id = permissions_id + $(v).val() + ",";
+                });
+
+                $.ajax({
+                    url : "{:U('Permissions/updateRolePermissions')}",
+                    data: {'role_id' : id, 'permissions_id' : permissions_id},
+                    type : 'post',
+                    dataType : 'json',
+                    success : function (data) {
+                        $("#modal-body").html("");
+                        $("#event-form").hide();
+                        if(data.status) {
+                            $(".save_success").show();
+                        }else{
+                            $(".save_error").show();
+                        }
+                    }
+                });
+
+
+            });
+        })
+    </script>
+    <!--#########################分配角色页面的js###################### -->
+    <script type="text/javascript">
+        var id = "";
+        /**
+         * 为角色分配权限
+         */
+        function assignPermissions(obj) {
+            id = $(obj).attr('role-id');
+            var allPermissionsUrl = "{:U('Permissions/permissions')}"; //查询所有权限
+            var rolePermissionsUrl= "{:U('Permissions/permissionsByRole')}";//获取该角色拥有哪些权限
+
+            /**
+             * 1.查询所有权限
+             * 2.获取该角色拥有哪些权限
+             */
+            $.ajax({
+                url : allPermissionsUrl,
+                type : 'post',
+                dataType: 'json',
+                success : function (data) {
+                    var permissionsData = data.data;
+                    if(data != "") {
+                        $.ajax({
+                            url : rolePermissionsUrl,
+                            data: {'id' : id},
+                            type: 'post',
+                            dataType: 'json',
+                            success : function (data) {
+                                var rolePermissionsData = "";
+                                if(data.status == 200) {
+                                   rolePermissionsData = data.data;
+                                    var html = "";
+                                    $(permissionsData).each(function (key, value) {
+
+                                        if(rolePermissionsData && $.inArray(value.id, rolePermissionsData) >= 0) {
+                                            html = html+"<div class='checkbox'><label><input  type='checkbox' checked='checked' value='"+value.id+"'>"+value.name+"</label></div>";
+                                        } else {
+                                            html = html+"<div class='checkbox'><label><input  type='checkbox' value='"+value.id+"'>"+value.name+"</label></div>";
+                                        }
+
+                                    });
+                                    $("#modal-body").append(html);
+                                    $("#event-form").show();
+                                }else{
+                                        layer.alert(data.message);
+                                }
+                            }
+                        });
+                    }else {
+                        layer.alert('请先去添加权限');
+                    }
+                }
+            });
+
+        }
+    </script>
+
+</block>

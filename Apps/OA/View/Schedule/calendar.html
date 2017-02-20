@@ -1,0 +1,231 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	
+</block>
+
+<block name="content">
+	<div class="row">
+		<div class="col-sm-10">
+			<div class="space"></div>
+
+			<!-- #section:plugins/data-time.calendar -->
+			<div id="calendar"></div>
+			
+			<!-- /section:plugins/data-time.calendar -->
+
+
+			<div id="event-form" class="modal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+		
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="blue bigger">请填写日程信息</h4>
+						</div>
+
+						<div class="modal-body">
+							<div class="row">				
+								<div class="col-xs-12 col-sm-12">
+									<form class="form-horizontal" role="form"  method="post" action="{:U('Schedule/add')}" id="eventform">
+
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="article_no"> 日程内容: </label>
+											<div class="col-sm-9">
+												<input type="text" name="title" id="title" placeholder="日程内容" class="col-xs-10 col-sm-8" />
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="description"> 说明: </label>
+											<div class="col-sm-6">
+												<textarea class="form-control" name="description" id="description"></textarea>
+											</div>
+										</div>
+
+										<div class="form-group">				
+											<label class="col-sm-3 control-label no-padding-right" for="begin_time"> 开始时间: </label>
+											<div class="col-sm-9">
+												<input type="text" id="begin_time" name="begin_time" class="datetime-picker col-xs-10 col-sm-8" data-date-format="yyyy-mm-dd hh:ii">
+											</div>
+										</div>
+										
+										<div class="form-group end_time">
+											<label class="col-sm-3 control-label no-padding-right" for="end_time"> 结束时间: </label>
+											<div class="col-sm-9">
+												<input type="text" id="end_time" name="end_time" class="datetime-picker col-xs-10 col-sm-8">
+											</div>
+										</div>
+
+										<div class="form-group">
+											<label class="col-sm-3 control-label no-padding-right" for="description"></label>
+											<div class="checkbox col-sm-9">
+												<label>
+													<input name="is_allday" id="is_allday" type="checkbox" class="ace" value="1" />
+												<span class="lbl"> 全天日程</span>
+												</label>
+											</div>
+										</div>
+
+										<input type="hidden" name="user_id" value="{:session('uid')}"/>
+										<!-- <input type="hidden" id="is_allday" name="is_allday" value="0"> -->
+
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button class="btn btn-sm btn-danger" data-dismiss="modal" action="{:U('Schedule/del')}">
+								<i class="ace-icon fa fa-trash-o"></i>
+								删除
+							</button>
+
+							<button class="btn btn-sm" data-dismiss="modal" >
+								<i class="ace-icon fa fa-times"></i>
+								取消
+							</button>
+
+							<button class="btn btn-sm btn-primary" type="submit">
+								<i class="ace-icon fa fa-check"></i>
+								保存
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/date-time/moment.min.js"></script>
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+	<script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="__JS__/fullcalendar.min.js"></script>
+	<script src="__JS__/zh-cn.js"></script>
+	<script src="__JS__/jquery.form.min.js"></script>
+	<script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			var calendar = $('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                }, 
+				weekNumbers: true,
+				events: "{:U('Schedule/getEvents', array('id'=>session('uid')))}",
+				selectable: true,
+				selectHelper: true,
+				select: function(start, end, jsEvent, view) {
+					var sTime, eTime;
+					if(start.hasTime())
+						sTime = start.format('YYYY-M-D H:mm');
+					else
+						sTime = start.format('YYYY-M-D');
+					
+					if(end.hasTime())
+						eTime = end.format('YYYY-M-D H:mm');
+					else
+						eTime = end.format('YYYY-M-D');
+
+					//使用$('#is_allday').attr('checked', true)
+					//的话会失效，不知道原因
+					if(view.name=='month')
+						$('#is_allday').get(0).checked = true;
+					else{
+						if(start.diff(end, 'days')!=0)
+							$('#is_allday').get(0).checked = true;
+						else
+							$('#is_allday').get(0).checked = false;
+					}
+					
+					$("#begin_time").val(sTime);
+					$('#end_time').val(eTime);
+					$('.modal').modal('show');
+					//bootbox.setLocale("zh_CN");
+					// bootbox.prompt("新日程内容:", function(title) {
+					// 	var eventData;
+					// 	var allDay;
+					// 	if(title!==null){
+					// 		if(view.name=='month')
+					// 			allDay = 1;
+					// 		eventData = {
+					// 			title: title,
+					// 			begin_time: start.format('YYYY-M-D H:mm'),
+					// 			end_time: end.format('YYYY-M-D H:mm'),
+					// 			user_id: {:session('uid')},
+					// 			color: '#DC143C',
+					// 			is_allday: allDay
+					// 		};
+					// 		$.post("{:U('Schedule/add')}", eventData,function(msg){
+					// 			if(msg==1){
+					// 				$('#calendar').fullCalendar('refetchEvents');
+					// 			}
+					// 			else{
+					// 				bootbox.alert(msg);
+					// 			}
+					// 		});
+					// 	}	
+					// });
+				},
+				
+				editable: true,
+			});
+			
+			$('.datetime-picker').datetimepicker({
+				format:'yyyy-mm-dd hh:ii',
+				autoclose:true,
+				todayBtn:true,
+				language:'zh-CN',
+			});
+
+			$('.btn-danger').hide();
+
+			$('#eventform').ajaxForm({
+				beforeSubmit: showRequest,
+				success: showResponse,
+				clearForm: true,
+				resetForm: true,
+				dataType: 'json'
+			});
+
+			function showRequest(formData, jqForm, options){
+				var form = jqForm[0];
+				var title = form.title.value;
+				if(title==''){
+					bootbox.alert('请填写日程内容！');
+					$('#title').focus();
+					return false;
+				}
+				else
+					return true;		
+			}
+
+			function showResponse(responseText, statusText, xhr, $form){
+				if(statusText=="success"){     
+				        if(responseText==1){ 
+				            $('.modal').modal('hide');//关闭弹出层 
+				            $('#calendar').fullCalendar('refetchEvents'); //重新获取所有事件数据 
+				        }else{ 
+				            bootbox.alert(responseText); 
+				        } 
+				    }else{ 
+				        bootbox.alert(statusText); 
+				    } 
+			}
+		});
+	</script>
+</block>

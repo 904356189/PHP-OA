@@ -1,0 +1,676 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="__CSS__/chosen.css" />
+</block>
+
+<block name="breadcrumbs">
+	<include file="Base/breadcrumbs" active="填写接待信息" leaf="接待登记" url="{:U('Reception/addReception')}"/>
+</block>
+
+<block name="content">
+	<form class="form-horizontal" role="form"  method="post" action="{:U('Reception/addReception')}" id="receptionform">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4>来访信息</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main">
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="article_no"> 来访机构: <strong class="text-danger">*</strong></label>
+						<div class="col-sm-8">
+							<input type="text" name="vistor" id="vistor" class="col-xs-12 col-sm-12" />
+							<em class="text-danger"></em>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="article_no"> 到访内容:<strong class="text-danger">*</strong> </label>
+						<div class="col-sm-8">
+							<input type="text" name="visit_content" id="visit_content" class="col-xs-12 col-sm-12" />
+							<em class="text-danger"></em>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="article_no"> 带队领导: </label>
+						<div class="col-sm-8">
+							<input type="text" name="visit_leader" id="visit_leader" class="col-xs-12 col-sm-12" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="article_no"> 联系人: </label>
+						<div class="col-sm-8">
+							<input type="text" name="contact" id="contact" class="col-xs-12 col-sm-12" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="phone"> 联系电话: </label>
+						<div class="col-sm-8">
+							<input type="text" name="phone" id="phone" class="col-xs-12 col-sm-12" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="visitor_count"> 到访人数:<strong class="text-danger">*</strong> </label>
+						<div class="col-sm-8">
+							<input type="text" name="visitor_count" id="visitor_count" class="input-mini" />
+							<em class="text-danger"></em>
+						</div>
+					</div>
+
+					<div class="form-group">				
+						<label class="col-sm-4 control-label no-padding-left" for="begin_time"> 到访时间:<strong class="text-danger">*</strong> </label>
+						<div class="col-sm-8">
+							<input type="text" name="begin_time" class="datetime-picker col-xs-12 col-sm-12" data-date-format="yyyy-mm-dd hh:ii" value="{$start}">
+							<em class="text-danger"></em>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-sm-4 control-label no-padding-left" for="end_time"> 结束时间:<strong class="text-danger">*</strong> </label>
+						<div class="col-sm-8">
+							<input type="text" name="end_time" class="datetime-picker col-xs-12 col-sm-12" value="{$end}">
+							<em class="text-danger"></em>
+						</div>
+					</div>
+
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4>接待信息</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main">
+
+						<div class="form-group">
+							<label class="col-sm-12" for="major_department">接待处室:<strong class="text-danger">*</strong> </label>
+							<div class="col-sm-12">
+								<foreach name="departments" item="department">
+									<label>
+										<input name="major_department" type="radio" class="ace group" value="{$department.id}"/>
+										<span class="lbl"> {$department.short_name}</span>
+									</label>
+								</foreach>
+								<em class="text-danger"></em>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<!-- <label class="col-sm-12" for="assist_department">配合处室: </label> -->
+							<label class="col-sm-12">
+								<input id="need_assist_department" type="checkbox" class="ace" />
+								<span class="lbl"> 配合处室</span>
+							</label>
+							<div class="col-sm-12" id="assist_deparment_div">
+								<!-- <foreach name="departments" item="department">
+									<label>
+										<input name="assist_department[]" type="checkbox" class="ace group" value="{$department.id}"/>
+										<span class="lbl"> {$department.short_name}</span>
+									</label>
+								</foreach> -->
+							</div>
+						</div>
+
+						<div class="form-group" id="reception_leader_div">
+							<label class="col-sm-12" for="receptionist">接待领导:</label>
+							<div class="col-sm-12">
+								<select multiple="" class="width-90 chosen-select tag-input-style" id="reception_leader" name="reception_leader[]" data-placeholder="请选择领导...">
+									<option value="">&nbsp;</option>
+									<foreach name="leaders" item="leader">
+										<option class="col-xs-10 col-sm-5" value="{$leader.id}">{$leader.first_name}{$leader.last_name}</option>
+									</foreach>
+								</select>
+								<em class="text-danger"></em>
+							</div>
+							<div class="col-sm-12">
+								<label>
+									<input name="create_schedule" id="create_schedule" type="checkbox" class="ace" value="1" />
+								<span class="lbl"> 生成日程</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-12">
+								<input id="need_receptionist" type="checkbox" class="ace" />
+								<span class="lbl"> 接待人员</span>
+							</label>
+							<div class="col-sm-12" id="receptionist_div">
+								<!-- <select multiple='' class='width-90 chosen-select tag-input-style' id='receptionist' name='receptionist[]' data-placeholder='请选择接待人员...'>
+								</select> -->
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-12" for="description">备注: </label>
+							<div class="col-sm-12">
+								<textarea class="form-control" name="comments" id="comments"></textarea>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-12" for="description"></label>
+							<div class="checkbox col-sm-12">
+								<label>
+									<input name="is_speech" id="need_speech" type="checkbox" class="ace" value="1" />
+								<span class="lbl"> 需要讲解</span>
+								</label><label>
+									<input name="need_mail" id="need_mail" type="checkbox" class="ace" value="1" />
+								<span class="lbl"> 邮件提醒</span>
+								</label>
+								<label>
+									<input name="is_meal" id="is_meal" type="checkbox" class="ace" value="1" />
+								<span class="lbl"> 需要用餐</span>
+								</label>
+							</div>
+						</div>
+
+						<input type="hidden" name="record_id" id="record_id" value="{:getCurrentUserId()}"/>
+						<input type="hidden" name="id" id="id">
+						<!-- <input type="hidden" id="is_allday" name="is_allday" value="0"> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4>参观信息</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main">
+						<div class="form-group">
+							<label class="col-sm-12" for="visit_places">参观地点:</label>
+							<div class="col-sm-12">
+								<foreach name="places" item="place">
+									<label>
+										<input name="view_place[]" type="checkbox" class="ace group" value="{$place.id}"/>
+										<span class="lbl"> {$place.name}</span>						
+									</label>
+								</foreach>
+								
+							</div>
+							<div class="col-sm-12">
+								<label>
+									<input name="append_other_place" type="checkbox" class="ace group" value="1"/>
+									<span class="lbl"> 其它地方 </span>						
+								</label>	
+							</div>
+							<div class="col-sm-12">
+								<input type="text" id="other_place" name="other_place" class="col-xs-12 col-sm-9">
+								<em class="text-danger"></em>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-12">
+								<label>
+									<input id="is_book_hall" name="is_book_hall" type="checkbox" class="ace group" value="1"/>
+									<span class="lbl">预订展厅</span>
+								</label>
+							</div>
+							<div class="form-group" id="bookHall">
+								<div class="col-sm-12">			
+									<label class="col-sm-4 control-label no-padding-left" for="begin_time"> 开始时间:<strong class="text-danger">*</strong> </label>
+									<div class="col-sm-8">
+										<input type="text" id="hall_start_time" name="hall_start_time" class="datetime-picker col-xs-12 col-sm-9" data-date-format="yyyy-mm-dd hh:ii">
+										<em class="text-danger"></em>
+									</div>
+								
+									<label class="col-sm-4 control-label no-padding-left" for="end_time"> 结束时间:<strong class="text-danger">*</strong> </label>
+									<div class="col-sm-8">
+										<input type="text" id="hall_end_time" name="hall_end_time" class="datetime-picker col-xs-12 col-sm-9">
+										<em class="text-danger"></em>
+									</div>
+
+
+									<input type="hidden" name="hall_id" value="1">
+								
+								</div>
+							</div>	
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-12">
+								<label>
+									<input id="is_book_room" name="is_book_room" type="checkbox" class="ace group" value="1"/>
+									<span class="lbl">预订会议室</span>
+								</label>
+							</div>
+							<div class="form-group" id="bookRoom">
+								<div class="col-sm-12">	
+									<label class="col-sm-4 control-label no-padding-left" for="dealer">选择会议室:<strong class="text-danger">*</strong></label>
+									<div class="col-sm-8">
+									<select name="room_id">
+										<option value="">&nbsp;</option>
+										<foreach name="rooms" item="rm">
+											<option value="{$rm.id}">{$rm.name}</option>
+										</foreach>
+									</select>
+									<em class="text-danger"></em>
+									</div>
+
+									<label class="col-sm-4 control-label no-padding-left" for="begin_time"> 开始时间:<strong class="text-danger">*</strong> </label>
+									<div class="col-sm-8">
+										<input type="text" id="room_start_time" name="room_start_time" class="datetime-picker col-xs-12 col-sm-9" data-date-format="yyyy-mm-dd hh:ii">
+										<em class="text-danger"></em>
+									</div>
+								
+									<label class="col-sm-4 control-label no-padding-left" for="end_time"> 结束时间:<strong class="text-danger">*</strong> </label>
+									<div class="col-sm-8">
+										<input type="text" id="room_end_time" name="room_end_time" class="datetime-picker col-xs-12 col-sm-9">
+										<em class="text-danger"></em>
+									</div>
+								</div>
+							</div>	
+						</div>
+						
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="clearfix form-actions">
+			<div class="col-md-offset-3 col-md-9">
+				<button class="btn btn-info" type="submit">
+					<i class="icon-ok bigger-110"></i>
+					保存
+				</button>
+
+				&nbsp; &nbsp; &nbsp;
+				<a class="btn" type="button" href="{:U('Reception/addReception')}">
+					<i class="icon-undo bigger-110"></i>
+					返回
+				</a>
+			</div>
+		</div>
+	</div>
+	</form>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/chosen.jquery.min.js"></script>
+	<script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+	<script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="__JS__/jquery.form.min.js"></script>
+	<script src="__JS__/jquery.validate.min.js"></script>
+	<script src="__JS__/messages_zh.min.js"></script>
+	<script src="__JS__/bootbox.min.js"></script>
+	<script src="__JS__/fuelux/fuelux.spinner.min.js"></script>
+	<script src="__JS__/date-time/moment.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			//初始化数字控件
+			//注意：图标不能是icon-xxx形式，必须是fa fa-xxx
+			$('.input-mini').ace_spinner({value:0,min:0,max:100,step:1, on_sides: true, icon_up:'fa fa-plus smaller-75', icon_down:'fa fa-minus smaller-75', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
+			//初始化datetime控件
+			$('.datetime-picker').datetimepicker({
+				format:'yyyy-m-d h:ii',
+				autoclose:true,
+				todayBtn:true,
+				language:'zh-CN',
+			});
+			//初始化chosen控件
+			$(".chosen-select").chosen();
+			$(window).on('resize.chosen', function() {
+				var w = $('.chosen-select').parent().width();
+				$('.chosen-select').next().css({'width':w});
+			}).trigger('resize.chosen');
+			//设置指示标位置
+			setSidebarActive('reception_root', 'reception_add');
+			$('#bookHall').hide();
+			$('#bookRoom').hide();
+			$('#assist_deparment_div').hide();
+			$('#receptionist_div').hide();
+			$('#other_place').hide();
+
+			//参观其它地方的显示
+			$("input[name='append_other_place']").on('click', function(){
+				if(this.checked)
+					$('#other_place').show();
+				else
+					$('#other_place').hide();
+			})
+
+			//预定展厅显示与隐藏
+			$('#is_book_hall').on('click', function(){
+				if(this.checked){
+					$('#hall_start_time').attr('value', $("input[name='begin_time']").val());
+					$('#hall_end_time').attr('value', $("input[name='end_time']").val());
+					checkTimeConflict(1,$("input[name='begin_time']").val(), $("input[name='end_time']").val())
+					$('#bookHall').show();
+				}
+				else{
+					$('#hall_start_time').attr('value','');
+					$('#hall_end_time').attr('value', '');
+					$('#bookHall').hide();
+					$('#conflict_hall').remove();
+				}
+			});
+			//预定其他房间的显示与隐藏
+			$('#is_book_room').on('click', function(){
+				if(this.checked){
+					$('#room_start_time').attr('value', $("input[name='begin_time']").val());
+					$('#room_end_time').attr('value', $("input[name='end_time']").val());
+					$('#bookRoom').show();
+				}
+				else{
+					$('#room_start_time').attr('value', '');
+					$('#room_end_time').attr('value', '');
+					$('#bookRoom').hide();
+				}
+			});
+
+			//检查房间时间是否冲突
+			$("select[name='room_id']").on('change', function(){
+				if($('#is_book_room').is(':checked')){
+					$('#conflict_meeting').remove();
+					var roomId = this.value;
+					checkTimeConflict(roomId, $("input[name='begin_time']").val(), $("input[name='end_time']").val());
+				}
+				else
+					$('#conflict_meeting').remove();
+			});
+
+			//配合处室的显示与隐藏
+			$('#need_assist_department').on('click', function(){
+				if(this.checked){
+					var chargeDeaprtment = $("input[name='major_department']:checked").val();
+					if(chargeDeaprtment){
+						createAssistDepartments(chargeDeaprtment);
+						$('#assist_deparment_div').show();
+					}
+					else{
+						bootbox.alert('请先选择接待处室！');
+						this.checked = false;
+					}	
+				}
+				else{
+					if($('#need_receptionist').is(':checked')){
+						$('#need_receptionist').trigger('click');
+					}
+					$('#assist_deparment_div').empty();
+					$('#assist_deparment_div').hide();
+				}
+			});
+			//接待处室变化后，配合处室的改变
+			$("input[name='major_department']").on('change', function(e){
+				//判断配合处室、接待人员是否打钩，打钩则触发'click'事件
+				if($('#need_assist_department').is(':checked')){
+					$('#need_assist_department').trigger('click');
+				}
+				if($('#need_receptionist').is(':checked')){
+					$('#need_receptionist').trigger('click');
+				}
+				
+			});
+			//接待人员情况
+			$('input#need_receptionist').on('click', function(){
+				if(this.checked){
+					var departmentIds = [];
+					var chargeDeaprtment = $("input[name='major_department']:checked").val();
+					if(!chargeDeaprtment){
+						bootbox.alert('请先选择接待处室！');
+						this.checked = false;
+					}
+					else{
+						departmentIds.push(chargeDeaprtment);
+						if($('#need_assist_department').is(':checked')){
+							$("input:checkbox[name='assist_department[]']:checked").each(function(){
+								
+								departmentIds.push($(this).val());
+							});
+						}
+						
+						createReceptionist(departmentIds);
+						$('#receptionist_div').show();	
+					}
+				}
+				else{
+					$('#receptionist_div').hide();
+					$('#receptionist_div').empty();
+				}
+			});
+
+			// 领导日程生成
+			$('#create_schedule').on('click', function(){
+				if(this.checked){
+					var leaders = $('#reception_leader').val();
+					if(!leaders){
+						bootbox.alert("请先选择接待领导！");
+						this.checked = false;
+					}
+				}
+			});
+
+			//表单验证设置
+			$('#receptionform').validate({
+				rules:{
+					vistor: "required",
+					visit_content: "required",
+					visitor_count: {
+						required: true,
+						min: 1
+					},
+					room_id: "required",
+					begin_time: "required",
+					end_time: "required",
+					major_department: "required",
+					hall_start_time:{
+						required: function(){
+							return $('#is_book_hall').attr('checked');
+						}
+					},
+					hall_end_time:{
+						required: function(){
+							return $('#is_book_hall').attr('checked');
+						}
+					},
+					room_start_time:{
+						required: function(){
+							return $('#is_book_room').attr('checked');
+						}
+					},
+					room_end_time:{
+						required: function(){
+							return $('#is_book_room').attr('checked');
+						}
+					},
+					other_place:{
+						required: function(){
+							return $('#append_other_place').attr('checked');
+						}
+					}
+				},//rules end
+				errorPlacement: function(error, element){
+					var next = element.next();
+					//来访人数的显示
+					if(element.attr('name')=='visitor_count'){
+						next = element.parent().parent().next();
+					}
+					//接待领导的显示
+					// if(element.attr('id')=='reception_leader'){
+					// 	next = element.next().next();
+					// }
+					//选择会议室的显示
+					if(element.attr('name')=='room_id'){
+						next = element.next().next();
+					}
+					if(element.attr('name')=='major_department'){
+						next = element.parent().next('em');
+					}
+					error.appendTo(next);
+				}
+			});
+
+			//处理表单的提交
+			$('#receptionform').ajaxForm({
+				beforeSubmit: showRequest,
+				success: showResponse,
+				clearForm: false,
+				dataType: 'json'
+			});
+
+
+
+		});
+		
+		// 判断并生成配合处室选项
+		function createAssistDepartments(exceptId){
+			$.get("{:U('Reception/getAssistDepartments')}", {id:exceptId}, function(data, textStatus){
+				var html = "";
+				var node = "<input name='assist_department[]' type='checkbox' class='ace' value='";
+				var title = "<span class='lbl'>";
+				$.each(data, function(n, depart){
+					var tmpInput = node+depart.id+"'"+"/>";
+					var tmpTitle = title+depart.short_name+"</span>";
+					var tmpNode = tmpInput+tmpTitle;
+					html += "<label>"+tmpNode+"</label>";
+				});	
+				$('#assist_deparment_div').append($(html));
+			}, 'json');
+			
+		}
+
+		// 判断并生成接待人员选项
+		function createReceptionist(Ids){
+			//注意：Ids是个数组
+			$.get("{:U('Reception/getReceptionist')}", {id:Ids, exceptLeader:1}, function(data, textStatus){
+				var html = "<select multiple='' class='width-90 chosen-select tag-input-style' id='receptionist' name='receptionist[]' data-placeholder='请选择接待人员...'>";
+				    html += "<option value=''>&nbsp;</option>";
+				var node = "<option class='col-xs-10 col-sm-5' value='";
+				$.each(data, function(n, person){
+					var tmpOption = node+person.id+"'>"+person.first_name+person.last_name+"</option>";
+					html += tmpOption;
+				});	
+				html += "</select>";
+				$('#receptionist_div').append($(html));
+				//注意，必须要重新初始化，不然chosen无法显示
+				$(".chosen-select").chosen();
+				
+			}, 'json');
+		}
+
+		// 检查房间时间是否有冲突
+		function checkTimeConflict(roomId, startTime, endTime){
+			$.get("{:U('Reception/checkTimeConflict')}", {id:roomId, start:startTime, end:endTime}, function(data, textStatus){
+				if(data!=-1){
+					var divId;
+					if(1==roomId)
+						divId = "conflict_hall";
+					else
+						divId = "conflict_meeting";
+					var liTag = "<li class='text-danger'>";
+					var html = "<div class='col-sm-12' id='"+divId+"'><label class='col-sm-12 text-danger'>注意，以下时间段可能存在冲突：</label><ul class='col-sm-12'>";											
+					$.each(data, function(n, item){
+						var start = getTime(item['start']);
+						var end = getTime(item['end']);
+						var tempLi = liTag+start+"-"+end+"&nbsp;&nbsp;&nbsp;"+item['content']+"</li>";
+						html += tempLi;
+					});
+					html += "</ul></div>";
+					if(roomId==1)
+						$('#bookHall').append($(html));
+					else
+						$('#bookRoom').append($(html));
+				}
+			}, 'json');
+		}
+
+		// 表单验证
+		function showRequest(formData, jqForm, options){
+			//radio无法验证，单独处理
+			if($('#receptionform').valid()){
+				var rpDepartment = $("input[name='major_department']").fieldValue();
+				if(!rpDepartment.length){
+					bootbox.alert('请选择接待处室！');
+					return false;
+				}
+				
+				var rpLeader = $("#reception_leader").fieldValue();
+				var receptionist = $('#receptionist').fieldValue();
+				if(!rpLeader.length&&!receptionist.length){
+					bootbox.alert("接待领导和接待人员不能同时为空！");
+					return false;
+				}
+
+				var viewPlace = $("input[name='view_place[]']").fieldValue();
+				var hall = $('#is_book_hall').fieldValue()[0];
+				var meeting = $('#is_book_room').fieldValue()[0];
+				var appendOtherPlace = $('input[name="append_other_place"]').fieldValue()[0];
+				if(!viewPlace.length && !hall && !meeting && !appendOtherPlace){
+					bootbox.alert("参观地点、展厅、会议室必须选择一个！");
+					return false;
+				}
+
+				// 判断展厅和会议室时间是否冲突
+				var hallStartTime = $('#hall_start_time').fieldValue()[0],
+				    hallEndTime = $('#hall_end_time').fieldValue()[0],
+				    roomStartTime = $('#room_start_time').fieldValue()[0],
+				    roomEndTime = $('#room_end_time').fieldValue()[0];
+				if(hallStartTime&&hallEndTime){
+					if(moment(hallStartTime).diff(moment(hallEndTime))>=0){
+						bootbox.alert("预定展厅开始时间不能迟于结束时间!");
+						return false;
+					}
+				}
+				if(roomStartTime&&roomEndTime){
+					if(moment(roomStartTime).diff(moment(roomEndTime))>=0){
+						bootbox.alert("预定会议室开始时间不能迟于结束时间！");
+						return false;
+					}
+				}
+				if(hallStartTime&&hallEndTime&&roomStartTime&&roomEndTime){
+					if(isTimeConflict(hallStartTime, hallEndTime, roomStartTime, roomEndTime)){
+						bootbox.alert("展厅和会议室时间冲突！");
+						return false;
+					}
+				}
+
+			}
+
+		}
+
+		function showResponse(responseText, statusText, xhr, $form){
+			if(responseText==1){
+				alert('保存成功！');
+				window.location.href = "{:U('Reception/addReception')}";
+			}
+			else{
+				bootbox.alert(responseText);
+			}
+		} 
+
+		function getTime(timeStr){
+			return moment(timeStr).format('H:mm');
+			//return timeStr;
+		}
+
+		function isTimeConflict(start, end, wantStart, wantEnd){
+			return moment(wantStart).isBefore(moment(end))&&moment(start).isBefore(moment(wantEnd));
+		}
+	</script>
+</block>

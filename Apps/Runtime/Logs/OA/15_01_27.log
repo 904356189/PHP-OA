@@ -1,0 +1,355 @@
+[ 2015-01-27T09:25:24+08:00 ] 127.0.0.1 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.026002s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.017001s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:25:28+08:00 ] 127.0.0.1 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.013001s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'zengk' AND `password` = 'c4ca4238a0b923820dcc509a6f75849b' LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-01-27 09:25:28',`login_count`=53,`calendar_color`='',`is_login`=1,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.021001s ]
+NOTIC: [8] Undefined index: headImg F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 48 行.
+
+[ 2015-01-27T09:25:29+08:00 ] 127.0.0.1 /develop/OA/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_saying` [ RunTime:0.011001s ]
+SQL: SELECT MIN(id) AS tp_min FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT MAX(id) AS tp_max FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT `content` FROM `oa_saying` WHERE `id` = 14 LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.010000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004001s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.003000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.003000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' AND a.begin_time BETWEEN '2015-01-27 00:00' AND '2015-01-27 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.007001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.010000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.017001s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.087005s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.087005s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001001s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/leaderCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004001s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.004000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004001s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.039002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.039002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/1.html?start=2014-12-29&end=2015-02-09&_=1422321933550
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.003000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/2.html?start=2014-12-29&end=2015-02-09&_=1422321933551
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.006000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/3.html?start=2014-12-29&end=2015-02-09&_=1422321933552
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-29&end=2015-02-09&_=1422321933553
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:25:33+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/4.html?start=2014-12-29&end=2015-02-09&_=1422321933555
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:25:34+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/8.html?start=2014-12-29&end=2015-02-09&_=1422321933554
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:25:34+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/5.html?start=2014-12-29&end=2015-02-09&_=1422321933556
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004001s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:25:40+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/9.html?start=2014-12-29&end=2015-02-09&_=1422321933557
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' ORDER BY a.begin_time asc  [ RunTime:0.002001s ]
+
+[ 2015-01-27T09:26:07+08:00 ] 127.0.0.1 /develop/OA/Schedule/personalCalendar.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.003000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.054003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.054003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:26:08+08:00 ] 127.0.0.1 /develop/OA/Schedule/getEvents/id/13.html?start=2014-12-29&end=2015-02-09&_=1422321968016
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '13' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:26:09+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.009001s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001001s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.004000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 35 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.043003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.044003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:26:09+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2015-01-26&end=2015-02-02&_=1422321969615
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-01-27T09:26:17+08:00 ] 127.0.0.1 /develop/OA/Reception/bookHall.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:bookHall
+
+[ 2015-01-27T09:26:25+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2015-01-26&end=2015-02-02&_=1422321985452
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-01-27T09:26:44+08:00 ] 127.0.0.1 /develop/OA/Index/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+
+[ 2015-01-27T09:26:45+08:00 ] 127.0.0.1 /develop/OA/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.017000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.017000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+

@@ -1,0 +1,92 @@
+<div class="col-sm-6">
+	<div class="widget-box transparent" id="recent-box">
+		<div class="widget-header">
+			<h4 class="widget-title lighter smaller">
+				<i class="ace-icon fa fa-calendar orange"></i>领导日程
+			</h4>
+			
+			<div class="widget-toolbar no-border">
+				<ul class="nav nav-tabs" id="recent-tab">
+					<foreach name="schedules" item="schedule" key="k">
+					<li 
+					<eq name="schedule.no" value="1">
+						class="首页"
+					</eq>
+					>
+						<a data-toggle="tab" href="#{$k}">{$schedule['fullname']}</a>
+					</li>
+					</foreach>
+				</ul>
+			</div>
+		</div>
+
+		<div class="widget-body">
+			<div class="widget-main padding-4">
+				<div class="tab-content padding-8">
+
+					<foreach name="schedules" item="schedule" key="k">
+					<div id="{$k}" class="tab-pane
+						<eq name="schedule.no" value="1">
+							active
+						</eq>
+					">
+						<h4 class="smaller lighter green">
+							<i class="ace-icon fa fa-list"></i>
+							{:date('Y年n月j日')}
+							<a href="{:U('Schedule/leaderCalendar')}" class="btn btn-info btn-xs pull-right">更多日程</a>
+						</h4>
+
+						<!-- #section:pages/dashboard.tasks -->
+						<ul id="tasks" class="item-list">
+							<!-- <notempty name="schedule.data"> -->
+								<foreach name="schedule.data" item="rec">
+									<li class="clearfix 
+										<eq name="rec.state" value="p">
+											item-default selected
+										</eq>
+										<eq name="rec.state" value="n">
+											item-orange
+										</eq>
+										<eq name="rec.state" value="f">
+											item-blue
+										</eq>
+									">
+									<label class="inline">
+										<span class="lbl">
+											<span class="text-warning">
+											<eq name="rec.allDay" value="1">
+												全天
+											</eq>
+											<neq name="rec.allDay" value="1"> 
+												{:date('H:i',strtotime($rec['start']))}
+												<notempty name="rec.end">
+												 - {:date('H:i',strtotime($rec['end']))}
+												</notempty> 
+											 	&nbsp;
+											</neq>
+											</span>
+											{$rec.title}
+										</span>
+									</label>
+									</li>
+								</foreach>
+							<!-- </notempty> -->
+							<!-- <empty name="schedule.data">
+								<li class="item-orange clearfix">
+								<label class="inline">
+									<span class="lbl"> 
+										今天没有日程
+									</span>
+								</label>
+								</li>
+							</empty> -->
+						</ul>
+						<!-- /section:pages/dashboard.tasks -->
+					</div>
+					</foreach>
+
+				</div>
+			</div><!-- /.widget-main -->
+		</div><!-- /.widget-body -->
+	</div><!-- /.widget-box -->
+</div><!-- /.col -->

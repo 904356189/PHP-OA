@@ -1,0 +1,165 @@
+<extend name="Base/base" />
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="用户管理" leaf="权限管理" url="#"/>
+</block>
+
+<block name="content">
+    <include file="rolealert"/>
+    <div class="row">    <!-- 表格 开始-->
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">共有<notempty name="count">{$count}<else/>0</notempty>条记录</h3>
+
+            <div class="table-responsive">
+                <table id="files" class="table table-striped table-bordered table-hover" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="center">
+                            序号
+                        </th>
+                        <th class="center">账号</th>
+                        <th class="center">姓名</th>
+                        <th class="center">邮箱</th>
+                        <th class="center">创建时间</th>
+
+                        <th class="center">操作</th>
+                    </tr>
+
+                    <notempty name="data">
+                        <volist name = "data" id="vo">
+                            <tr>
+                                <th class="center">
+                                    {$vo.id}
+                                </th>
+                                <th class="center">{$vo.username}</th>
+                                <th class="center">{$vo.first_name}{$vo.last_name}</th>
+                                <th class="center">{$vo.email}</th>
+                                <th class="center">{$vo.create_time}</th>
+
+                                <!-- <th class="center"><a href="{:U('Permissions/disRole')}?uid={$vo.id}" class="glyphicon glyphicon-cog" aria-hidden="true">分配角色 </a></th> -->
+                                <th class="center"><div class="btn-group">
+                                    <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" href="#">
+                                        Action
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#" class="disable" data-id="{$vo.id}">禁用此用户</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#" class="role" data-id="{$vo.id}" onclick="handleRole(this)">分配角色</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">close</a></li>
+                                    </ul>
+                                </div></th>
+                            </tr>
+                        </volist>
+                    </notempty>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>   <!-- 搜索结果 结束 -->
+
+</block>
+
+
+
+<block name="page_js">
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <script src="__JS__/jquery.dataTables.min.js"></script>
+    <script src="__JS__/jquery.dataTables.bootstrap.js"></script>
+    <script src="__JS__/messages_zh.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+    <script type="text/javascript">
+        jQuery(function($){
+            //设置指示标位置
+            setSidebarActive('permissions_root', 'user_list');
+        });
+    </script>
+
+    <!--#########################分配角色页面的js###################### -->
+    <script type="text/javascript">
+        var uid = "";
+        /**
+         * 为用户设置角色
+         */
+        function handleRole(obj) {
+            var url = "{:U('Permissions/disRole')}";
+            uid = $(obj).attr('data-id');
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {'uid' : uid},
+                dataType : 'json',
+                success : function (data) {
+                    if(data.status == 200) {
+                        var roleInfo = data.roleInfo;
+                        var userRole = data.userRole;
+                        var userRoleId = data.userRoleId;
+                        var html = "";
+                        $(roleInfo).each(function (key, value) {
+                            if(userRoleId && userRoleId == value.id) {
+                                html = html + "<tr><input checked='check'  class='role_id' type='radio' name='role' value="+value.id+">"+value.name+"</tr>";
+                            }else {
+                                html = html + "<tr><input  class='role_id' type='radio' name='role' value=" + value.id + ">" + value.name + "</tr>";
+                            }
+                        });
+
+                        $(".modal").show();
+                        var modal_body = document.getElementById("modal-body");
+                        modal_body.innerHtml = "";
+                        modal_body.innerHTML = html;
+                    }
+                },error : function () {
+                    alert('ERROR');
+                    return false;
+                }
+            });
+        }
+
+
+        $(function () {
+            /**
+             * 取消
+             */
+            $(".qx").on('click',function () {
+                $(".modal").hide();
+                $(".check_save").hide();
+            });
+
+
+            /**
+             * 保存
+             */
+            $(".save_role").on('click',function () {
+                var role_id = $("input[name='role']:checked").val();
+                if(!role_id) {
+                    $(".check_save").show();
+                    return false;
+                }else{
+                    var url = "{:U('Permissions/disRole')}";
+                    $(".check_save").hide();
+
+                    //调用角色设置方法
+                    $.ajax({
+                        url : url,
+                        data : {'role_id': role_id, 'uid' : uid},
+                        type : 'post',
+                        dataType : 'json',
+                        success : function (data) {
+                            $(".modal").hide();
+                            if(data.status != 200) {
+                                $(".save_error").show();
+                            }else{
+                                $(".save_success").show();
+                            }
+                        }
+                    });
+                }
+            })
+        })
+    </script>
+</block>

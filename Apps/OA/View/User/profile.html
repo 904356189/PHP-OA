@@ -1,0 +1,105 @@
+<extend name="Base/base" />
+
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="用户资料" leaf="用户资料" url="{:U('Share/cloud')}"/>
+</block>
+
+<block name="content">
+
+   <span><用户资料展示></用户资料展示></span>
+
+</block>
+
+<block name="page_js">
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <script src="__JS__/jquery.dataTables.min.js"></script>
+    <script src="__JS__/jquery.dataTables.bootstrap.js"></script>
+    <script src="__JS__/messages_zh.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+    <script type="text/javascript">
+        jQuery(function($){
+
+            //设置指示标位置
+            //setSidebarActive('vacation_cloud', 'vacation_root');
+
+            var t = $('.table').DataTable( {
+                "columnDefs": [ {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                } ],
+                "order": [[ 5, 'desc' ]],
+                "lengthChange": false,   //取消每页显示记录数
+                "searching": false,      //取消搜索框
+                "pageLength": 10,
+                "language": {
+                    "info": "第 _PAGE_ 页，共 _PAGES_ 页", //设置页面显示类型
+                    "search": "筛选:",
+                    "zeroRecords": "没有找到您要的记录",
+                    "infoEmpty": "没有相关的记录",
+                    "infoFiltered": "(从 _MAX_ 条记录中筛选)",
+                },
+
+                "dom": '<"toolbar">frtip' //去掉工具栏的阴影
+            } );
+
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+
+
+            //表单验证设置
+            $('#uploadform').validate({
+                rules:{
+                    file_name: "required",
+                    open_scope: "required",
+                    series_id: "required"
+                },//rules end
+                errorPlacement: function(error, element){
+                    var next = element.next();
+
+                    error.appendTo(next);
+                }
+            });
+
+            //处理表单的提交
+            $('#uploadform').ajaxForm({
+                beforeSubmit: showRequest,
+                success: showResponse,
+                clearForm: false,
+                dataType: 'json'
+            });
+
+
+
+        });
+
+
+
+
+        // 表单验证
+        function showRequest(formData, jqForm, options){
+            //radio无法验证，单独处理
+            return $('#uploadform').valid()
+
+        }
+
+        function showResponse(responseText, statusText, xhr, $form){
+            if(responseText==1){
+                bootbox.alert('保存成功！');
+                window.location.href = "{:U('Share/uploadDocs')}";
+            }
+            else{
+                bootbox.alert(responseText);
+            }
+        }
+
+    </script>
+</block>

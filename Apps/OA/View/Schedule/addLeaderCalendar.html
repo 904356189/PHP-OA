@@ -1,0 +1,278 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	
+</block>
+
+<block name="content">
+	<div class="row">
+		<div class="col-sm-10">
+			<div class="space"></div>
+
+			<!-- #section:plugins/data-time.calendar -->
+			<div id="calendar"></div>
+			
+			<!-- /section:plugins/data-time.calendar -->
+		</div>
+		<div class="col-sm-2">
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+
+			<div class="row">
+				<div class="widget-box">
+					<div class="widget-header">
+						<h4 class="widget-title">
+							<notempty name="leaders">
+								选择领导
+							</notempty>
+							<notempty name="departLeader">
+								处室领导
+							</notempty>
+						</h4>
+					</div>
+
+					<div class="widget-body">
+						<div class="widget-main">
+							<div>								
+								<notempty name="leaders">
+									<select class="form-control" id="select_leader">
+										<!-- <option value="0"></option> -->
+										<foreach name="leaders" item="leader">
+											<option value="{$leader.id}">{$leader.first_name}{$leader.last_name}</option>
+										</foreach>
+									</select>
+								</notempty>
+
+								<notempty name="departLeader">
+									<span>{$departLeader.first_name}{$departLeader.last_name}</span>	
+								</notempty>	
+								
+							</div>
+						</div>
+					</div>
+			</div>
+			
+		</div>
+		
+		<include file="eventform" />
+
+	</div>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/date-time/moment.min.js"></script>
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+	<script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="__JS__/fullcalendar.min.js"></script>
+	<script src="__JS__/zh-cn.js"></script>
+	<script src="__JS__/jquery.form.min.js"></script>
+	<script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			var calendar = $('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                }, 
+				weekNumbers: true,
+				minTime: "06:00:00",
+				maxTime: "21:00:00",
+				slotDuration: "00:15:00",
+				// events: "{:U('Schedule/getEvents', array('id'=>getCurrentUserId()))}",
+				selectable: true,
+				selectHelper: true,
+				select: function(start, end, jsEvent, view) {
+					if(view.name=='month')
+						$('#is_allday').get(0).checked = true;
+					else{
+						if(start.diff(end, 'days')!=0)
+							$('#is_allday').get(0).checked = true;
+						else
+							$('#is_allday').get(0).checked = false;
+					}
+					$('#id').val('');
+					$('#title').val('');
+					$('#description').val('');
+					$("#begin_time").val(formatTime(start));
+					$('#end_time').val(formatTime(end));
+					$('.btn-danger').hide();
+					$('#eventform').get(0).action = "{:U('Schedule/add')}";
+					$('.modal').modal('show');	
+				},
+				eventClick: function(calEvent, jsEvent, view){
+					$.get("{:U('Schedule/getDescription')}", {id:calEvent.id}, function(data, textStatus){
+						$('#description').val(data);
+					}, 'json');
+					$('#id').val(calEvent.id);
+					$('#title').val(calEvent.title);
+					$("#begin_time").val(formatTime(calEvent.start));
+					$('#end_time').val(formatTime(calEvent.end));
+					$('#is_allday').get(0).checked = calEvent.allDay;
+					$('.btn-danger').show();
+					$('#eventform').attr('action', "{:U('Schedule/edit')}");
+					$('.modal').modal('show');
+				},
+				editable: true,
+				eventDrop: function(event, delta, revertFunc, jsEvent, ui, view){
+					dropAndResize(event, revertFunc);
+				},
+				eventResize: function(event, delta, revertFunc, jsEvent, ui, view){
+					dropAndResize(event, revertFunc);
+				},
+			});
+			
+			$('.datetime-picker').datetimepicker({
+				format:'yyyy-mm-dd hh:ii',
+				autoclose:true,
+				todayBtn:true,
+				language:'zh-CN',
+			});
+
+			$('.btn-danger').hide();
+			//删除日程的处理
+			$('.btn-danger').on('click', function(e){
+				bootbox.confirm('你确定要删除吗？', function(){
+					var eventID = $('#id').val();
+					$.get("{:U('Schedule/del')}", {id:eventID}, function(msg){
+						if(1==msg){
+							$('#calendar').fullCalendar('removeEvents', eventID);
+							$('.modal').modal('hide');
+						}
+						else{
+							bootbox.alert(msg);
+						}
+					});
+				});
+			});
+
+			$('#eventform').ajaxForm({
+				beforeSubmit: showRequest,
+				success: showResponse,
+				clearForm: true,
+				//resetForm: true,
+				dataType: 'json'
+			});
+
+			setSidebarActive('calendar_root', 'add_leader_calendar');
+
+			$('#addCalendar').on('click', function(){
+				$('#id').val('');
+				$('#title').val('');
+				$('#description').val('');
+				$("#begin_time").val('');
+				$('#end_time').val('');
+				$('.btn-danger').hide();
+				$('#eventform').get(0).action = "{:U('Schedule/add')}";
+				$('#is_allday').get(0).checked = false;
+				$('.modal').modal('show');	
+			});
+
+			//处理添加处室领导日程
+			var departLeaderId = "{$departLeader.id}";
+			if(departLeaderId)
+				$('#user_id').val('{$departLeader.id}');
+			var departSource = getEventSource(departLeaderId);
+			$('#calendar').fullCalendar('addEventSource', departSource);
+
+			//添加全委领导日程的处理
+			//保存上一次的选择值
+			var lastLeaderId = $('#select_leader').val(); 
+			//初始化日历显示
+			$('#calendar').fullCalendar('addEventSource', getEventSource(lastLeaderId));
+			//添加变更事件
+			$('#select_leader').on('change', function(){
+				var nowLeaderId = $('#select_leader').val();
+				var oldSource = getEventSource(lastLeaderId);
+				var newSource = getEventSource(nowLeaderId);
+				
+				$('#calendar').fullCalendar('removeEventSource', oldSource);
+					
+				$('#calendar').fullCalendar('addEventSource', newSource);
+				$('#user_id').val(nowLeaderId);
+				
+				lastLeaderId = nowLeaderId;				
+			});
+
+			function showRequest(formData, jqForm, options){
+				var form = jqForm[0];
+				var title = form.title.value;
+				var start = form.begin_time.value;
+				if(title==''){
+					bootbox.alert('请填写日程内容！');
+					$('#title').focus();
+					return false;
+				}
+				else if(start==''){
+					bootbox.alert('请填写开始时间！');
+					$('#begin_time').focus();
+					return false;
+				}
+				else
+					return true;		
+			}
+
+			function showResponse(responseText, statusText, xhr, $form){
+				if(statusText=="success"){     
+				        if(responseText==1){ 
+				            $('.modal').modal('hide');//关闭弹出层 
+				            $('#calendar').fullCalendar('refetchEvents'); //重新获取所有事件数据 
+				        }
+				        else{ 
+				            bootbox.alert(responseText); 
+				        } 
+				}
+				else{ 
+				    bootbox.alert(statusText); 
+				} 
+			}
+			function formatTime(time){
+				if(!time)
+					return '';
+				if(time.hasTime())
+					return time.format('YYYY-M-D H:mm');
+				else
+					return time.format('YYYY-M-D');
+			}
+
+			function dropAndResize(event, revertFunc){
+				var eventData = {
+					id: event.id,
+					start: formatTime(event.start),
+					end: formatTime(event.end),
+					allDay: event.allDay
+				};
+				$.post("{:U('Schedule/drop')}", eventData, function(msg){
+					if(msg!=1){
+						bootbox.alert(msg);
+						revertFunc();
+					}
+				});
+			}
+
+			function getEventSource(leaderId){
+				//直接使用thinkphp的U函数出错，只能采用如下方法处理
+				if(!leaderId)
+					return '';
+				var urlStr = "{:U('Schedule/getEvents')}".split(".");
+				return urlStr[0]+"/id/"+leaderId+".html";
+			}
+			
+		});
+	</script>
+</block>

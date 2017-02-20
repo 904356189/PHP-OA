@@ -1,0 +1,114 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="__CSS__/jquery.gritter.css" />
+	
+</block>
+
+<block name="content">
+	<div class="row">
+		<div class="col-sm-10">
+			<div class="space"></div>
+
+			<!-- #section:plugins/data-time.calendar -->
+			<div id="calendar"></div>
+			
+			<!-- /section:plugins/data-time.calendar -->
+		</div>
+		<div class="col-sm-2">
+			<div class="space"></div>
+			
+			<include file="image-description" />
+		</div>
+
+	</div>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/date-time/moment.min.js"></script>
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/fullcalendar.min.js"></script>
+	<script src="__JS__/zh-cn.js"></script>
+	<script src="__JS__/jquery.gritter.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			//设置日历，注意：没有设置events, eventSources属性
+			var calendar = $('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                }, 
+				minTime: "06:00:00",
+				maxTime: "21:00:00",
+				slotDuration: "00:15:00",
+				weekNumbers: true,
+
+				//日历点击事件
+				eventClick: function(calEvent, jsEvent, view){
+					$.get("{:U('Schedule/getEventInfo')}", {event_id:calEvent.id}, function(data, textStatus){
+						var content = "<p>"+"开始时间："+formatTime(calEvent.start)+"<br>"+"结束时间："+formatTime(calEvent.end)+"<br>"+"说&nbsp;&nbsp;"+"明："+data['description']+"</p>";
+						$.gritter.add({
+							title: calEvent.title,
+							text: content,
+							image: "__STATIC__/avatars/avatar1.png",//data['image'],
+							sticky: false,
+							time: '',
+							class_name: ''
+						});
+					}, 'json');
+				}
+				
+			});
+			
+			// 添加复选框事件
+			// 基本逻辑：获取领导ID，如果是勾选，则添加日程源，否则删除日程源
+			$("input.leader").on('click', function(){
+				var source = getEventSource($(this).val());
+				if(this.checked){
+					$('#calendar').fullCalendar("addEventSource", source);
+				}
+				else
+					$('#calendar').fullCalendar('removeEventSource', source);
+			});
+
+			// 初始化页面，将所有领导的日程都load进来
+			$("input.leader").each(function(){
+				$(this).attr('checked', true);
+				var source = getEventSource($(this).val());
+				$('#calendar').fullCalendar("addEventSource", source); 
+			});
+
+		});
+		
+		setSidebarActive('calendar_root', 'leader_calendar');
+
+		function formatTime(time){
+			if(!time)
+				return '';
+			if(time.hasTime())
+				return time.format('YYYY-M-D H:mm');
+			else
+				return time.format('YYYY-M-D');
+		}
+
+		// 根据领导ID获取日程源url
+		function getEventSource(leaderId){
+			//直接使用thinkphp的U函数出错，只能采用如下方法处理
+			var urlStr = "{:U('Schedule/getEvents')}".split(".");
+			return urlStr[0]+"/id/"+leaderId+".html";
+		}
+		
+	</script>
+</block>

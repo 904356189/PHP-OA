@@ -1,0 +1,22 @@
+<extend name="Base/base" />
+
+<block name="sayings">
+	<include file="Base/sayings" />
+</block>
+
+<block name="content">
+	<div class="row">
+		<notempty name="schedules">
+			<include file="schedulebox" />
+		</notempty>
+		<include file="meetingorder" />
+	</div>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			clearSidebarActive();
+		});
+	</script>
+</block>

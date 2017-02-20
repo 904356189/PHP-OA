@@ -1,0 +1,31 @@
+<div class="widget-box transparent">
+	<div class="widget-header">
+		<h4>图例说明</h4>
+	</div>
+	<div class="widget-body">
+		<div class="widget-main no-padding">
+			<!-- <div id="external-events" >
+				<foreach name="leaders" item="leader">
+					<div class="external-event" style="background-color:{$leader.calendar_color};" >
+						<i class="ace-icon fa fa-arrows"></i>
+						{$leader.first_name}{$leader.last_name}
+					</div>
+				</foreach>
+			</div> -->
+			<div class="control-group">
+
+				<!-- #section:custom/checkbox -->
+				<foreach name="leaders" item="leader">
+				<div class="checkbox">
+					<label>
+						<input id="leaderIds" name="leaderIds[]" type="checkbox" class="ace leader" value="{$leader.id}"/>
+						<span class="lbl"> {$leader.first_name}{$leader.last_name}</span>
+						<span class="lbl" style="background-color:{$leader.calendar_color};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
+					</label>
+				</div>
+				</foreach>
+
+			</div>
+		</div>
+	</div>
+</div>

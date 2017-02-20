@@ -1,0 +1,215 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+    <link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+    <link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+
+</block>
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="数据统计" leaf="接待管理" url="#"/>
+</block>
+
+<block name="content">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="space"></div>
+
+            <!-- #section:plugins/data-time.calendar -->
+            <div id="calendar"></div>
+
+            <!-- /section:plugins/data-time.calendar -->
+        </div>
+        <div class="col-sm-2">
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+            <div class="space"></div>
+
+            <div class="row">
+                <div class="widget-box">
+                    <div class="widget-header">
+                        <h4 class="widget-title">
+                            请选择要统计的房间
+                        </h4>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main">
+                            <div>
+                                <notempty name="rooms">
+                                    <select class="form-control" id="select_room">
+                                        <!-- <option value="0"></option> -->
+                                        <foreach name="rooms" item="room">
+                                            <option value="{$room.id}">{$room.name}</option>
+                                        </foreach>
+                                    </select>
+                                </notempty>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+</block>
+
+<block name="page_js">
+    <script src="__JS__/date-time/moment.min.js"></script>
+    <script src="__JS__/jquery-ui.custom.min.js"></script>
+    <script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+    <script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+    <script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="__JS__/fullcalendar.min.js"></script>
+    <script src="__JS__/zh-cn.js"></script>
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+    <script type="text/javascript">
+        jQuery(function($){
+            var calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                },
+                defaultView: 'agendaWeek',
+                allDaySlot: false,
+                weekNumbers: true,
+                minTime: "08:00:00",
+                maxTime: "18:00:00",
+                slotDuration: "00:15:00",
+                // events: "{:U('Schedule/getEvents', array('id'=>getCurrentUserId()))}",
+                selectable: true,
+                selectHelper: true,
+                select: function(start, end, jsEvent, view) {
+                    if(view.name!='month'){
+                        if($('#select_room').val()==1){
+                            window.location.href = getUrl(start, end, 'R');
+                        }
+                        else{
+                            bootbox.confirm({
+                                message: "请选择是接待还是会议",
+                                buttons: {
+                                    cancel: {
+                                        label: "会议",
+                                        className: "btn-success btn-sm"
+                                    },
+                                    confirm:{
+                                        label: "接待",
+                                        className: "btn-primary btn-sm"
+                                    }
+                                },
+                                callback: function(result){
+                                    if(result){
+                                        window.location.href = getUrl(start, end, 'R');
+                                    }
+                                    else{
+                                        window.location.href = getUrl(start, end, 'M');
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        bootbox.alert('请在周视图或日视图中预订！');
+                    }
+
+                },
+                eventClick: function(calEvent, jsEvent, view){
+
+                },
+                editable: true,
+                eventDrop: function(event, delta, revertFunc, jsEvent, ui, view){
+                    dropAndResize(event, revertFunc);
+                },
+                eventResize: function(event, delta, revertFunc, jsEvent, ui, view){
+                    dropAndResize(event, revertFunc);
+                },
+            });
+
+
+
+            setSidebarActive('reception_root', 'reception_statics');//菜单选中
+
+
+
+
+            // 选择房间的处理
+            // 保存上一次的选择值
+            var lastRoomId = $('#select_room').val();
+            //初始化日历显示
+            $('#calendar').fullCalendar('addEventSource', getEventSource(lastRoomId));
+            // 添加变更事件
+            $('#select_room').on('change', function(){
+                var nowRoomId = $('#select_room').val();
+                var oldSource = getEventSource(lastRoomId);
+                var newSource = getEventSource(nowRoomId);
+
+                $('#calendar').fullCalendar('removeEventSource', oldSource);
+
+                $('#calendar').fullCalendar('addEventSource', newSource);
+
+                lastRoomId = nowRoomId;
+            });
+
+
+            function formatTime(time){
+                if(!time)
+                    return '';
+                if(time.hasTime())
+                    return time.format('YYYY-M-D H:mm');
+                else
+                    return time.format('YYYY-M-D');
+            }
+
+            function dropAndResize(event, revertFunc){
+                var eventData = {
+                    id: event.id,
+                    start: formatTime(event.start),
+                    end: formatTime(event.end),
+                    allDay: event.allDay
+                };
+                $.post("{:U('Schedule/drop')}", eventData, function(msg){
+                    if(msg!=1){
+                        bootbox.alert(msg);
+                        revertFunc();
+                    }
+                });
+            }
+
+            function getEventSource(Id){
+                //直接使用thinkphp的U函数出错，只能采用如下方法处理
+                if(!Id)
+                    return '';
+                var urlStr = "{:U('Reception/getRoomCalendar')}".split(".");
+                return urlStr[0]+"/id/"+Id+".html";
+            }
+
+            // 根据会议还是接待生成不同的URL
+            function getUrl(start, end, type){
+                if('R'==type){
+                    var root = "{:U('Reception/receptionForm')}".split(".");
+                    return root[0]+"/start/"+formatTime(start)+"/end/"+formatTime(end)+".html";
+                }
+                else{
+                    var root = "{:U('Reception/meetingForm')}".split(".");
+                    return root[0]+"/start/"+formatTime(start)+"/end/"+formatTime(end)+".html";
+                }
+            }
+
+        });
+    </script>
+</block>

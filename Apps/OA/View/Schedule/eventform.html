@@ -1,0 +1,81 @@
+<div id="event-form" class="modal" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="blue bigger">请填写日程信息</h4>
+			</div>
+
+			<div class="modal-body">
+				<div class="row">				
+					<div class="col-xs-12 col-sm-12">
+						<form class="form-horizontal" role="form"  method="post" action="" id="eventform">
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="article_no"> 日程内容: </label>
+								<div class="col-sm-9">
+									<input type="text" name="title" id="title" placeholder="日程内容" class="col-xs-10 col-sm-8" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="description"> 说明: </label>
+								<div class="col-sm-6">
+									<textarea class="form-control" name="description" id="description"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">				
+								<label class="col-sm-3 control-label no-padding-right" for="begin_time"> 开始时间: </label>
+								<div class="col-sm-9">
+									<input type="text" id="begin_time" name="begin_time" class="datetime-picker col-xs-10 col-sm-8" data-date-format="yyyy-mm-dd hh:ii">
+								</div>
+							</div>
+							
+							<div class="form-group end_time">
+								<label class="col-sm-3 control-label no-padding-right" for="end_time"> 结束时间: </label>
+								<div class="col-sm-9">
+									<input type="text" id="end_time" name="end_time" class="datetime-picker col-xs-10 col-sm-8">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" for="description"></label>
+								<div class="checkbox col-sm-9">
+									<label>
+										<input name="is_allday" id="is_allday" type="checkbox" class="ace" value="1" />
+									<span class="lbl"> 全天日程</span>
+									</label>
+								</div>
+							</div>
+
+							<input type="hidden" name="user_id" id="user_id" value="{:getCurrentUserId()}"/>
+							<input type="hidden" name="id" id="id">
+							<!-- <input type="hidden" id="is_allday" name="is_allday" value="0"> -->
+
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<a class="btn btn-sm btn-danger">
+					<i class="ace-icon fa fa-trash-o"></i>
+					删除
+				</a>
+
+				<button class="btn btn-sm btn-primary" type="submit">
+					<i class="ace-icon fa fa-check"></i>
+					保存
+				</button>
+
+				<button class="btn btn-sm" data-dismiss="modal" >
+					<i class="ace-icon fa fa-times"></i>
+					取消
+				</button>
+
+				
+			</div>
+		</div>
+	</div>
+</div>	

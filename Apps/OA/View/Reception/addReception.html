@@ -1,0 +1,233 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	
+</block>
+
+<block name="breadcrumbs">
+	<include file="Base/breadcrumbs" active="接待登记" leaf="接待管理" url="#"/>
+</block>
+
+<block name="content">
+	<div class="row">
+		<div class="col-sm-9" id="content">
+			<div class="space"></div>
+
+			<!-- #section:plugins/data-time.calendar -->
+			<div id="calendar"></div>
+			
+			<!-- /section:plugins/data-time.calendar -->
+		</div>
+
+		<div class="col-sm-3" id="rightSideBar">
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+
+			
+			<p>
+				<a class="btn btn-app btn-success btn-xs" id="addReception" href="{:U('Reception/receptionForm')}">
+					<i class="ace-icon fa fa-pencil bigger-160"></i>
+					添加
+				</a>
+			</p>
+			
+			
+			<div class="row">
+				<div class="col-xs-6 col-sm-12 pricing-box">
+					<div class="widget-box widget-color-blue">
+						<div class="widget-header">
+							<h5 class="widget-title bigger lighter">接待信息</h5>
+						</div>
+
+						<div class="widget-body">
+							<div class="widget-main">
+								<ul class="list-unstyled spaced2">
+									
+									<!-- <li>
+										<i class="ace-icon fa fa-check green"></i>
+										使用展厅：10:30
+									</li> -->
+								</ul>
+
+							</div>
+
+							<div id="deleteBtn">
+								<a href="#" class="btn btn-block btn-primary" id="delLink">
+									<i class="ace-icon fa fa-trash-o bigger-110"></i>
+									<span>删除</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+
+	</div>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/date-time/moment.min.js"></script>
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+	<script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="__JS__/fullcalendar.min.js"></script>
+	<script src="__JS__/zh-cn.js"></script>
+	<script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			var calendar = $('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+				defaultView: 'agendaWeek',
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                },
+                allDaySlot: false, 
+				weekNumbers: true,
+				minTime: "08:00:00",
+				maxTime: "18:00:00",
+				slotDuration: "00:15:00",
+				events: "{:U('Reception/getReception')}",
+				selectable: true,
+				selectHelper: true,
+				select: function(start, end, jsEvent, view) {
+					
+					if(start.hasTime()){
+						var root = "{:U('Reception/receptionForm')}".split(".");
+						var url = root[0]+"/start/"+formatTime(start)+"/end/"+formatTime(end)+".html";
+						window.location.href = url;	
+					}
+					
+				},
+				eventClick: function(calEvent, jsEvent, view){
+					var receptionId = calEvent.id;
+					getReceptionInfo(receptionId);
+
+				},
+				
+			});
+
+			$('#deleteBtn').hide();
+			$('.pricing-box').hide();
+			hideInfoBox();
+			
+			
+			setSidebarActive('reception_root', 'reception_add');
+
+
+			function getReceptionInfo(id){
+				if(id){
+					$.get("{:U('Reception/receptionInfo')}", {id: id}, function(data, statusText){
+						var li = "<li><i class='ace-icon fa fa-trash green'></i>";
+						var html = "";
+						html += li+"到访："+data.vistor+"</li>";
+						html += li+"时间："+data.time+"</li>";
+						html += li+"人数："+data.count+"</li>";
+						html += li+"参观地点："+data.visit_places+"</li>";
+						html += li+"接待处室："+data.department+"</li>";
+						html += li+"接待领导："+data.leaders+"</li>";
+						html += li+"接待人员："+data.receptionist+"</li>";
+						if(data.hall)
+							html += li+"展厅时间："+data.hall+"</li>";
+						if(data.meeting)
+							html += li+"会议室："+data.meeting+"</li>";
+						$('ul.spaced2').empty();
+						$('ul.spaced2').append($(html));
+
+						if(data.delete){
+							// var root= "{:U('Reception/delReception')}".split(".");
+							// var link = root[0]+"/id/"+id+".html";
+							// $('a#delLink').attr('href', link);
+							$('a#delLink').unbind('click');
+							$('a#delLink').on('click', function(){
+								bootbox.confirm({
+									message: "将同时删除房间预定记录和领导日程记录，是否确定？",
+									buttons: {
+										confirm:{
+											label: "确定",
+											className: "btn-primary btn-sm"
+										},
+										cancel: {
+											label: "取消",
+											className: "btn-sm"
+										}
+									},
+									callback: function(result){
+										if(result){
+											$.post("{:U('Reception/delReception')}", {id:id}, function(msg){
+												if(1==msg){
+													$('#calendar').fullCalendar('removeEvents', id);
+													$('.pricing-box').hide();
+												}
+												else{
+													bootbox.alert(msg);
+												}
+											});
+										}
+									}
+								});
+							});
+							$('#deleteBtn').show();
+						}
+						else
+							$('#deleteBtn').hide();
+
+						
+						showInfoBox();
+						$('.pricing-box').show();
+								
+					}, 'json');
+				}
+			}
+
+			function formatTime(time){
+				if(!time)
+					return '';
+				if(time.hasTime())
+					return time.format('YYYY-M-D H:mm');
+				else
+					return time.format('YYYY-M-D');
+			}
+
+			function hideInfoBox(){
+				
+				$('#content').removeClass('col-sm-9');
+				$('#rightSideBar').removeClass('col-sm-3');
+				$('a#addReception').removeClass('btn-block');
+				$('#content').addClass('col-sm-11');
+				$('#rightSideBar').addClass('col-sm-1');
+				$('a#addReception').addClass('btn-app');
+			}
+
+			function showInfoBox(){
+				$('#content').removeClass('col-sm-11');
+				$('#rightSideBar').removeClass('col-sm-1');
+				$('a#addReception').removeClass('btn-app');
+
+				$('#content').addClass('col-sm-9');
+				$('#rightSideBar').addClass('col-sm-3');
+				$('a#addReception').addClass('btn-block');
+				
+			}
+
+			
+		});
+	</script>
+</block>

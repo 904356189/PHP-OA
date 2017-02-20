@@ -1,0 +1,325 @@
+[ 2015-03-23T08:56:43+08:00 ] 127.0.0.1 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.025002s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.013000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.013001s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.025002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-03-23T08:56:47+08:00 ] 127.0.0.1 /develop/oa/Index/login.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.029002s ]
+SQL: SELECT * FROM `oa_user` WHERE `username` = 'zengk' AND `password` = 'c4ca4238a0b923820dcc509a6f75849b' LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-03-23 08:56:47',`login_count`=91,`calendar_color`='',`is_login`=1,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.024001s ]
+NOTIC: [8] Undefined index: headImg F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 49 行.
+
+[ 2015-03-23T08:56:48+08:00 ] 127.0.0.1 /develop/OA/Index/main.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_saying` [ RunTime:0.015001s ]
+SQL: SELECT MIN(id) AS tp_min FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT MAX(id) AS tp_max FROM `oa_saying` LIMIT 1   [ RunTime:0.001000s ]
+SQL: SELECT `content` FROM `oa_saying` WHERE `id` = 40 LIMIT 1   [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.014001s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.username,a.last_name,a.first_name,a.calendar_color FROM oa_user a LEFT JOIN oa_department b on a.department_id = b.id  WHERE b.name = '委领导' AND a.is_active = 1  [ RunTime:0.002001s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT b.id,b.username,b.last_name,b.first_name,b.calendar_color FROM oa_department a LEFT JOIN oa_user b on a.leader_id = b.id  WHERE a.id <> 1 AND b.is_active = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.003000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '1' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.003000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '2' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '3' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '9' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '8' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '4' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_schedule` [ RunTime:0.004000s ]
+SQL: SELECT a.id,a.title,a.begin_time as start,a.end_time as end,a.is_allday as allDay,b.calendar_color as color FROM oa_schedule a LEFT JOIN oa_user b on a.user_id = b.id  WHERE a.user_id = '5' AND a.begin_time BETWEEN '2015-03-23 00:00' AND '2015-03-23 23:59' ORDER BY a.begin_time asc  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.008000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.029002s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.009001s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8] Use of undefined constant leaf - assumed 'leaf' F:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\490e990885cbf651d9e780dc1cded698.php 第 583 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.098006s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.098006s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-03-23T08:56:55+08:00 ] 127.0.0.1 /develop/OA/Reception/bookRoom.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+ERR: 非法操作:bookRoom
+
+[ 2015-03-23T08:56:59+08:00 ] 127.0.0.1 /develop/OA/Reception/addMeeting.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.003000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8] Use of undefined constant 接待管理 - assumed '接待管理' F:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\00fb2a9abee82c4a73951c794d35a40b.php 第 586 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.045002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.045002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-03-23T08:57:00+08:00 ] 127.0.0.1 /develop/OA/Reception/getMeeting.html?start=2015-03-23&end=2015-03-30&_=1427072220340
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_meeting` [ RunTime:0.016001s ]
+SQL: SELECT `id`,`type`,`content`,`begin_time`,`end_time` FROM `oa_meeting`  [ RunTime:0.001000s ]
+
+[ 2015-03-23T08:57:06+08:00 ] 127.0.0.1 /develop/OA/Reception/getMeeting.html?start=2015-03-16&end=2015-03-23&_=1427072220341
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001001s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_meeting` [ RunTime:0.007000s ]
+SQL: SELECT `id`,`type`,`content`,`begin_time`,`end_time` FROM `oa_meeting`  [ RunTime:0.001000s ]
+
+[ 2015-03-23T08:57:07+08:00 ] 127.0.0.1 /develop/OA/Reception/meetingInfo.html?id=5
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_meeting` [ RunTime:0.004000s ]
+SQL: SELECT * FROM `oa_meeting` WHERE `id` = 5 LIMIT 1   [ RunTime:0.001000s ]
+
+[ 2015-03-23T09:00:12+08:00 ] 127.0.0.1 /develop/OA/Reception/addReception.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.013001s ]
+SQL: SELECT `id`,`name` FROM `oa_viewplace`  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department` WHERE `id` <> 1  [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.003001s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8] Use of undefined constant 接待管理 - assumed '接待管理' F:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\fc49aaaaabc1d6df9fe741c8fc1676ea.php 第 586 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.037002s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.037002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+
+[ 2015-03-23T09:00:13+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2015-03-23&end=2015-03-30&_=1427072412862
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_reception` [ RunTime:0.015000s ]
+SQL: SELECT `id`,`vistor`,`begin_time`,`end_time` FROM `oa_reception`  [ RunTime:0.000000s ]
+
+[ 2015-03-23T09:00:15+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2015-03-16&end=2015-03-23&_=1427072412863
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_reception` [ RunTime:0.006000s ]
+SQL: SELECT `id`,`vistor`,`begin_time`,`end_time` FROM `oa_reception`  [ RunTime:0.001000s ]
+
+[ 2015-03-23T09:00:16+08:00 ] 127.0.0.1 /develop/OA/Reception/getReception.html?start=2015-03-09&end=2015-03-16&_=1427072412864
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_reception` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`vistor`,`begin_time`,`end_time` FROM `oa_reception`  [ RunTime:0.001001s ]
+
+[ 2015-03-23T09:00:17+08:00 ] 127.0.0.1 /develop/OA/Reception/receptionInfo.html?id=6
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_reception` [ RunTime:0.004000s ]
+SQL: SELECT * FROM `oa_reception` WHERE `id` = 6 LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_viewplace` [ RunTime:0.005001s ]
+SQL: SELECT `name` FROM `oa_viewplace` WHERE `id` = 4 LIMIT 1   [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_room_booking` [ RunTime:0.015001s ]
+SQL: SHOW COLUMNS FROM `oa_room_booking` [ RunTime:0.004000s ]
+SQL: SELECT b.name,a.begin_time,a.end_time FROM oa_room_booking a LEFT JOIN oa_room b on b.id = a.room_id  WHERE a.event_type = 'R' AND a.event_id = '6'  [ RunTime:0.018001s ]
+
+[ 2015-03-23T09:05:41+08:00 ] 127.0.0.1 /develop/OA/Reception/addMeeting.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_group_access` [ RunTime:0.004000s ]
+SQL: SELECT `rules` FROM oa_group_access a INNER JOIN oa_group g on a.group_id=g.id  WHERE ( a.uid='13' and g.status='1' )  [ RunTime:0.001000s ]
+SQL: SHOW COLUMNS FROM `oa_rule` [ RunTime:0.004000s ]
+SQL: SELECT `condition`,`name` FROM `oa_rule` WHERE `id` IN ('1','2') AND `type` = 1 AND `status` = 1  [ RunTime:0.000000s ]
+NOTIC: [2] in_array() expects parameter 2 to be array, null given F:\wamp\www\develop\OA\Apps\Common\Common\function.php 第 36 行.
+NOTIC: [8] Use of undefined constant 接待管理 - assumed '接待管理' F:\wamp\www\develop\OA\Apps\Runtime\Cache\OA\00fb2a9abee82c4a73951c794d35a40b.php 第 586 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+
+[ 2015-03-23T09:05:41+08:00 ] 127.0.0.1 /develop/OA/Reception/getMeeting.html?start=2015-03-23&end=2015-03-30&_=1427072741598
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_meeting` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`type`,`content`,`begin_time`,`end_time` FROM `oa_meeting`  [ RunTime:0.000000s ]
+
+[ 2015-03-23T09:21:51+08:00 ] 127.0.0.1 /develop/OA/Index/logout.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.004000s ]
+SQL: SELECT * FROM `oa_user` WHERE `id` = 13 LIMIT 1   [ RunTime:0.001000s ]
+SQL: UPDATE `oa_user` SET `username`='zengk',`password`='c4ca4238a0b923820dcc509a6f75849b',`first_name`='曾',`last_name`='科',`gender`='M',`birthday`='1981-01-08',`begin_work_date`='2006-07-01',`enter_date`='2013-04-23',`email`='38170508@qq.com',`image_url`='public',`last_login`='2015-03-23 08:56:47',`login_count`=91,`calendar_color`='',`is_login`=0,`is_active`=1,`is_super`=1,`department_id`=5,`duty_id`=5,`level_id`=4,`create_time`='2014-12-04 10:44:27',`update_time`='2014-12-04 10:52:21' WHERE `id` = 13 [ RunTime:0.026001s ]
+
+[ 2015-03-23T09:21:52+08:00 ] 127.0.0.1 /develop/OA/Index/index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001000s ]
+NOTIC: [8192] mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead F:\wamp\www\develop\OA\Think\Library\Think\Db\Driver\Mysql.class.php 第 52 行.
+SQL: SHOW COLUMNS FROM `oa_user` [ RunTime:0.005000s ]
+SQL: SELECT `id`,`first_name`,`last_name` FROM `oa_user` WHERE `is_active` = 1  [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.008000s ]
+SQL: SELECT `id`,`short_name` FROM `oa_department`  [ RunTime:0.001001s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.005000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.004000s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.004000s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.001000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.001001s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.001000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.016000s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001000s ]
+

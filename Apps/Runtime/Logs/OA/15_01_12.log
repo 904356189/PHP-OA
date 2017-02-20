@@ -1,0 +1,26 @@
+[ 2015-01-12T11:42:21+08:00 ] 172.30.88.31 /develop/oa/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000000s ]
+SQL: SHOW COLUMNS FROM `oa_duty` [ RunTime:0.078000s ]
+SQL: SHOW COLUMNS FROM `oa_level` [ RunTime:0.093600s ]
+SQL: SHOW COLUMNS FROM `oa_department` [ RunTime:0.046800s ]
+SQL: SELECT `id`,`name` FROM `oa_department`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_level`  [ RunTime:0.000000s ]
+SQL: SELECT `id`,`name` FROM `oa_duty`  [ RunTime:0.000000s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.046801s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.046801s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.031200s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.031200s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000000s ]
+

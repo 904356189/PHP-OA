@@ -1,0 +1,243 @@
+<extend name="Base/base" />
+
+<block name="page_styles">
+	<link rel="stylesheet" href="__CSS__/fullcalendar.css" />
+	<link rel="stylesheet" href="__CSS__/bootstrap-datetimepicker.min.css" />
+	
+</block>
+
+<block name="content">
+	<div class="row">
+		<div class="col-sm-11">
+			<div class="space"></div>
+
+			<!-- #section:plugins/data-time.calendar -->
+			<div id="calendar"></div>
+			
+			<!-- /section:plugins/data-time.calendar -->
+		</div>
+		<div class="col-sm-1">
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+			<div class="space"></div>
+
+			<div class="row">
+				<p>
+					
+					<button class="btn btn-app btn-success btn-xs" id="addCalendar">
+						<i class="ace-icon fa fa-pencil bigger-160"></i>
+						添加
+					</button>
+					<button class="btn btn-app btn-purple btn-xs">
+						<i class="ace-icon fa fa-cloud-download bigger-160"></i>
+						导出
+					</button>
+					<button class="btn btn-app btn-info btn-xs">
+						<i class="ace-icon fa fa-envelope bigger-160"></i>
+						发至邮箱
+					</button>
+				</p>
+			</div>
+			
+		</div>
+		
+		<include file="eventform" />
+
+	</div>
+</block>
+
+<block name="page_js">
+	<script src="__JS__/date-time/moment.min.js"></script>
+	<script src="__JS__/jquery-ui.custom.min.js"></script>
+	<script src="__JS__/jquery.ui.touch-punch.min.js"></script>
+	<script src="__JS__/date-time/bootstrap-datetimepicker.min.js"></script>
+	<script src="__JS__/date-time/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="__JS__/fullcalendar.min.js"></script>
+	<script src="__JS__/zh-cn.js"></script>
+	<script src="__JS__/jquery.form.min.js"></script>
+	<script src="__JS__/bootbox.min.js"></script>
+</block>
+
+<block name="inline_js">
+	<script type="text/javascript">
+		jQuery(function($){
+			var calendar = $('#calendar').fullCalendar({
+				header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+                timeFormat: 'H:mm',
+                buttonText: {
+                    prev: '<',
+                    next: '>',
+                }, 
+				weekNumbers: true,
+				minTime: "06:00:00",
+				maxTime: "21:00:00",
+				slotDuration: "00:15:00",
+				events: "{:U('Schedule/getEvents', array('id'=>getCurrentUserId()))}",
+				selectable: true,
+				selectHelper: true,
+				select: function(start, end, jsEvent, view) {
+					if(view.name=='month')
+						$('#is_allday').get(0).checked = true;
+					else{
+						if(start.diff(end, 'days')!=0)
+							$('#is_allday').get(0).checked = true;
+						else
+							$('#is_allday').get(0).checked = false;
+					}
+					$('#id').val('');
+					$('#title').val('');
+					$('#description').val('');
+					$("#begin_time").val(formatTime(start));
+					$('#end_time').val(formatTime(end));
+					$('.btn-danger').hide();
+					$('#eventform').get(0).action = "{:U('Schedule/add')}";
+					$('.modal').modal('show');	
+				},
+				eventClick: function(calEvent, jsEvent, view){
+					$.get("{:U('Schedule/getDescription')}", {id:calEvent.id}, function(data, textStatus){
+						$('#description').val(data);
+					}, 'json');
+					$('#id').val(calEvent.id);
+					$('#title').val(calEvent.title);
+					$("#begin_time").val(formatTime(calEvent.start));
+					$('#end_time').val(formatTime(calEvent.end));
+					$('#is_allday').get(0).checked = calEvent.allDay;
+					$('.btn-danger').show();
+					$('#eventform').attr('action', "{:U('Schedule/edit')}");
+					$('.modal').modal('show');
+				},
+				editable: true,
+				eventDrop: function(event, delta, revertFunc, jsEvent, ui, view){
+					dropAndResize(event, revertFunc);
+				},
+				eventResize: function(event, delta, revertFunc, jsEvent, ui, view){
+					dropAndResize(event, revertFunc);
+				},
+			});
+			
+			$('.datetime-picker').datetimepicker({
+				format:'yyyy-mm-dd hh:ii',
+				autoclose:true,
+				todayBtn:true,
+				language:'zh-CN',
+			});
+
+			$('.btn-danger').hide();
+			//删除日程的处理
+			$('.btn-danger').on('click', function(e){
+				bootbox.confirm({
+					message: "您确定要删除吗？",
+					buttons: {
+						confirm: {
+							label: "确定",
+							className: "btn-primary btn-sm"
+						},
+						cancel: {
+							label: "取消",
+							className: "btn-sm"
+						}
+					},
+					callback: function(result){
+						if(result){
+							var eventID = $('#id').val();
+							$.get("{:U('Schedule/del')}", {id:eventID}, function(msg){
+								if(1==msg){
+									$('#calendar').fullCalendar('removeEvents', eventID);
+									$('.modal').modal('hide');
+								}
+								else{
+									bootbox.alert(msg);
+								}
+							});
+						}
+					}
+				});
+			});
+
+			$('#eventform').ajaxForm({
+				beforeSubmit: showRequest,
+				success: showResponse,
+				clearForm: true,
+				//resetForm: true,
+				dataType: 'json'
+			});
+
+			setSidebarActive('calendar_root', 'personal_calendar');
+
+			$('#addCalendar').on('click', function(){
+				$('#id').val('');
+				$('#title').val('');
+				$('#description').val('');
+				$("#begin_time").val('');
+				$('#end_time').val('');
+				$('.btn-danger').hide();
+				$('#eventform').get(0).action = "{:U('Schedule/add')}";
+				$('#is_allday').get(0).checked = false;
+				$('.modal').modal('show');	
+			})
+
+			function showRequest(formData, jqForm, options){
+				var form = jqForm[0];
+				var title = form.title.value;
+				var start = form.begin_time.value;
+				if(title==''){
+					bootbox.alert('请填写日程内容！');
+					$('#title').focus();
+					return false;
+				}
+				else if(start==''){
+					bootbox.alert('请填写开始时间！');
+					$('#begin_time').focus();
+					return false;
+				}
+				else
+					return true;		
+			}
+
+			function showResponse(responseText, statusText, xhr, $form){
+				if(statusText=="success"){     
+				        if(responseText==1){ 
+				            $('.modal').modal('hide');//关闭弹出层 
+				            $('#calendar').fullCalendar('refetchEvents'); //重新获取所有事件数据 
+				        }
+				        else{ 
+				            bootbox.alert(responseText); 
+				        } 
+				}
+				else{ 
+				    bootbox.alert(statusText); 
+				} 
+			}
+			function formatTime(time){
+				if(!time)
+					return '';
+				if(time.hasTime())
+					return time.format('YYYY-M-D H:mm');
+				else
+					return time.format('YYYY-M-D');
+			}
+
+			function dropAndResize(event, revertFunc){
+				var eventData = {
+					id: event.id,
+					start: formatTime(event.start),
+					end: formatTime(event.end),
+					allDay: event.allDay
+				};
+				$.post("{:U('Schedule/drop')}", eventData, function(msg){
+					if(msg!=1){
+						bootbox.alert(msg);
+						revertFunc();
+					}
+				});
+			}
+
+			
+		});
+	</script>
+</block>

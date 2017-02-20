@@ -1,0 +1,298 @@
+<div id="sidebar" class="sidebar responsive">
+	<script type="text/javascript">
+		try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+	</script>
+	<ul class="nav nav-list">
+		<li class="active open" id="calendar_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-calendar"></i>
+				<span class="menu-text"> 日程管理 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<if condition="authCheck('CAN_VIEW_LEADER_CALENDAR', getCurrentUserId())">
+				<li class="" id="leader_calendar">
+					<a href="{:U('Schedule/leaderCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						领导日程
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+				</if>
+
+				<li class="" id="personal_calendar">
+					<a href="{:U('Schedule/personalCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						个人日程
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+				
+				<if condition="authCheck('CAN_ADD_DEPART_LEADER_CALENDAR,CAN_ADD_ALL_LEADER_CALENDAR', getCurrentUserId())">
+				<li class="" id="add_leader_calendar">
+					<a href="{:U('Schedule/addLeaderCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						添加领导日程
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+				</if>
+
+			</ul>
+		</li>
+
+		<!-- 发文管理 -->
+		<li class="" id="article_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-pencil"></i>
+				<span class="menu-text"> 发文管理 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+				<li class="" id="leader_calendar">
+					<a href="{:U('Schedule/leaderCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						申请文号
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="personal_calendar">
+					<a href="{:U('Schedule/personalCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						文号审批
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+				
+				<li class="" id="add_leader_calendar">
+					<a href="{:U('Schedule/addLeaderCalendar')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						发文查询
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+			</ul>
+		</li>
+		
+		<!-- 接待管理 -->
+		<li class="" id="reception_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-users"></i>
+				<span class="menu-text"> 接待管理 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+
+				<li class="" id="reception_add">
+					<a href="{:U('Reception/addReception')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						接待登记
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="reception_meeting_add">
+					<a href="{:U('Reception/addMeeting')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						会议登记
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="reception_bookroom">
+					<a href="{:U('Reception/bookRoom')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						预定房间
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+
+				<li class="" id="reception_statics">
+					<a href="{:U('Reception/receptionStatics')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						数据统计
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+		
+		<!-- 共享空间 -->
+		<li class="" id="share_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-cloud"></i>
+				<span class="menu-text"> 共享空间 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+
+				<li class="" id="share_add">
+					<a href="{:U('Share/uploadDocs')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						上传资料
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="share_cloud">
+					<a href="{:U('Share/cloud')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						资料手册
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="share_company">
+					<a href="{:U('Share/company')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						企业名录
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="share_statics">
+					<a href="{:U('Share/shareStatics')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						数据统计
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+		
+		<!-- 请休假管理 -->
+		<li class="" id="vacation_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-coffee"></i>
+				<span class="menu-text"> 请休假管理 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+
+				<li class="" id="vacation_add">
+					<a href="{:U('Vacation/addVacation')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						请休假申请
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="vacation_cloud">
+					<a href="{:U('Vacation/search')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						请休假查询
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+
+				<li class="" id="vacation_statics">
+					<a href="{:U('Vacation/statics')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						数据统计
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+
+
+
+		<!-- 权限管理 -->
+		<li class="" id="permissions_root">
+			<a href="#" class="dropdown-toggle">
+				<i class="menu-icon fa fa-pencil"></i>
+				<span class="menu-text"> 权限管理 </span>
+
+				<b class="arrow fa fa-angle-down"></b>
+			</a>
+
+			<b class="arrow"></b>
+
+			<ul class="submenu">
+
+				<li class="" id="user_list">
+					<a href="{:U('Permissions/user')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						用户列表
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="role_list">
+					<a href="{:U('Permissions/role')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						角色列表
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+				<li class="" id="permissions_list">
+					<a href="{:U('Permissions/permissions')}">
+						<i class="menu-icon fa fa-caret-right"></i>
+						权限列表
+					</a>
+
+					<b class="arrow"></b>
+				</li>
+
+			</ul>
+		</li>
+
+	</ul><!-- /.nav-list -->
+
+	<!-- #section:basics/sidebar.layout.minimize -->
+	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+		<i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+	</div>
+
+	<!-- /section:basics/sidebar.layout.minimize -->
+	<script type="text/javascript">
+		try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+	</script>
+</div>
+<!-- /section:basics/sidebar -->

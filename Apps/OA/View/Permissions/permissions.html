@@ -1,0 +1,223 @@
+<extend name="Base/base" />
+
+<block name="breadcrumbs">
+    <include file="Base/breadcrumbs" active="权限列表" leaf="权限管理" url="#"/>
+    <div class="alert alert-info success"  role="alert" style="display: none;">
+        <strong>Success !</strong><span class="ajax_success_message">.</span>
+    </div>
+
+    <div class="alert alert-danger error" role="alert" style="display: none;">
+        <strong>Error ！</strong><span class="ajax_error_message">.</span>
+    </div>
+
+</block>
+
+<block name="content">
+    <div class="alert alert-danger save_error" role="alert" style="display: none;">
+        <strong>Error ！</strong> 保存失败.
+    </div>
+
+    <div class="alert alert-info save_success"  role="alert" style="display: none;">
+        <strong>Success !</strong> 编辑权限成功.
+    </div>
+    <div class="row">    <!-- 表格 开始-->
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">共有{$count}条记录</h3>
+
+            <div class="table-responsive">
+                <table id="files" class="table table-striped table-bordered table-hover" width="100%">
+                    <thead>
+                    <tr>
+                        <th class="center">序号</th>
+                        <th class="center">名称</th>
+                        <th class="center">路径</th>
+                        <th class="center">创建时间</th>
+                        <th class="center">修改时间</th>
+                        <th class="center">操作</th>
+                    </tr>
+                    <notempty name="data">
+                        <volist name="data" id="vo">
+                            <tr>
+                                <th class="center">{$vo.id}</th>
+                                <th class="center">{$vo.name}</th>
+                                <th class="center">{$vo.permissions_url}</th>
+                                <th class="center">{$vo.create_time}
+                                <th class="center">{$vo.update_time}</th>
+                                <th class="center">
+                                    <button type="button" class="btn btn-danger" permissions-id="{$vo.id}" onclick="removePermissions(this)">删除</button>
+                                    <button type="button" class="btn btn-warning" permissions-id="{$vo.id}" onclick="updatePermissions(this)">修改</button>
+                                </th>
+                            </tr>
+                        </volist>
+                    </notempty>
+                    </thead>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <include file="updatePermissions"/>
+</block>
+
+
+
+<block name="page_js">
+    <script src="__JS__/jquery.form.min.js"></script>
+    <script src="__JS__/jquery.validate.min.js"></script>
+    <script src="__JS__/jquery.dataTables.min.js"></script>
+    <script src="__JS__/jquery.dataTables.bootstrap.js"></script>
+    <script src="__JS__/messages_zh.min.js"></script>
+    <script src="__JS__/bootbox.min.js"></script>
+    <script src="__JS__/layer/layer.js"></script>
+</block>
+
+<block name="inline_js">
+    <script type="text/javascript">
+        /**
+         * 格式化时间
+         */
+        $(function () {
+            Date.prototype.pattern=function(fmt) {
+                var o = {
+                    "M+" : this.getMonth()+1, //月份
+                    "d+" : this.getDate(), //日
+                    "h+" : this.getHours()%12 == 0 ? 12 : this.getHours()%12, //小时
+                    "H+" : this.getHours(), //小时
+                    "m+" : this.getMinutes(), //分
+                    "s+" : this.getSeconds(), //秒
+                    "q+" : Math.floor((this.getMonth()+3)/3), //季度
+                    "S" : this.getMilliseconds() //毫秒
+                };
+                var week = {
+                    "0" : "/u65e5",
+                    "1" : "/u4e00",
+                    "2" : "/u4e8c",
+                    "3" : "/u4e09",
+                    "4" : "/u56db",
+                    "5" : "/u4e94",
+                    "6" : "/u516d"
+                };
+                if(/(y+)/.test(fmt)){
+                    fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+                }
+                if(/(E+)/.test(fmt)){
+                    fmt=fmt.replace(RegExp.$1, ((RegExp.$1.length>1) ? (RegExp.$1.length>2 ? "/u661f/u671f" : "/u5468") : "")+week[this.getDay()+""]);
+                }
+                for(var k in o){
+                    if(new RegExp("("+ k +")").test(fmt)){
+                        fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+                    }
+                }
+                return fmt;
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        jQuery(function($){
+            //设置指示标位置
+            setSidebarActive('permissions_root', 'permissions_list');
+            
+            $(".qx").on('click', function () {4
+                $("#event-form").hide();
+            });
+            
+            $(".permissions_id").on('click', function () {
+                $("#event-form").hide();
+            });
+
+
+            $(".save").on('click', function () {
+                var url = "{:U('Permissions/updatePermissions')}";
+                var name = $("input[name='permissions_name']").val();
+                var permissions_id = $("input[name='permissions_id']").val();
+                var permissions_url = $("input[name='permissions_url']").val();
+                if(!name || !permissions_id || !permissions_url) {
+                    layer.alert('参数错误');
+                    return false;
+                }
+
+                var data = $(".form-horizontal").serialize();
+                $.ajax({
+                    url : url,
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success : function (data) {
+                        $("#event-form").hide();
+                        if(data.status == 200) {
+                            //遍历满足条件的tr并修改值
+                            $("#files").find("tr").each(function (key, value) {
+                                if($(value).children().eq(0).html() == permissions_id) {
+                                    var date = new Date();
+                                    $(value).children().eq(1).html(name);
+                                    $(value).children().eq(2).html(permissions_url);
+                                    $(value).children().eq(4).html(date.pattern("yyyy-MM-dd hh:mm:ss"));
+                                }
+                            });
+                            $(".save_success").show();
+                        }else{
+                            $(".save_error").show();
+                        }
+                    }
+                });
+            })
+        });
+    </script>
+
+    <script type="text/javascript">
+        /**
+         * 删除权限
+         * @param obj
+         * @return boolean
+         */
+        function removePermissions(obj) {
+            layer.confirm('确定删除？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                var permissions_id = $(obj).attr('permissions-id');
+                var url            = "{:U('Permissions/removePermissions')}";
+                $.ajax({
+                    url : url,
+                    type : 'post',
+                    data : {'permissions_id' : permissions_id},
+                    dataType : 'json',
+                    success : function (data) {
+                        layer.closeAll();
+                        if(data.status == 200) {
+                            $(obj).parents("tr").remove();
+                            $(".ajax_success_message").html(data.message);
+                            $(".alert-info").show();
+                        }else{
+                            $(".ajax_error_message").html(data.message);
+                            $(".alert-danger").show();
+                            return false;
+                        }
+                    }
+                });
+
+            }, function(){
+                layer.closeAll();
+            });
+        }
+
+
+        /**
+         * 修改权限
+         * @param obj
+         * @return boolean
+         */
+        function updatePermissions(obj) {
+            var permissions_id = $(obj).attr('permissions-id');
+            var name           = $(obj).parents().parents().children().eq(1).html();
+            var permissions_url= $(obj).parents().parents().children().eq(2).html();
+
+            $("input[name='permissions_name']").val(name);
+            $("input[name='permissions_id']").val(permissions_id);
+            $("input[name='permissions_url']").val(permissions_url);
+            $("#event-form").show();
+        }
+
+    </script>
+</block>
